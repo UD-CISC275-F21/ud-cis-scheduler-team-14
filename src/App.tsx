@@ -10,7 +10,7 @@ function App(): JSX.Element {
                 UD CIS Scheduler
                 <p>
                     Hello World!!!!!
-                    kelvingy
+                    Guoyu Li; Hanfei Liang
                 </p>
             </header>
         </div>
