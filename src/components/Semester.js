@@ -4,11 +4,11 @@ const Semester = ({value, courses, onAdd, onDelete}) => {
     return (
         <div>
             {value}
-            <button class ="btn btn-primary m-2" onClick = {onAdd}>Add Class</button>
-            <button class ="btn btn-primary m-2" >Delete</button>
+            <button className ="btn btn-primary m-2" onClick = {onAdd}>Add Class</button>
+            <button className ="btn btn-primary m-2" >Delete</button>
             
-            <table class = "table table-striped" border = "1px">
-                <thead class="thead-dark">
+            <table className = "table table-striped" border = "1px">
+                <thead className="thead-dark">
                     {/* dark not working */}
                     <tr>
                         <th scope="col">#</th>
@@ -22,7 +22,7 @@ const Semester = ({value, courses, onAdd, onDelete}) => {
                     <td><textarea>{course.course}</textarea></td>
                     <td><textarea>{course.description}</textarea></td>
                     <td><textarea>{course.credit}</textarea></td>
-                    <button class ="btn btn-primary m-2" onClick = {()=>onDelete(course.id)} >Delete</button>
+                    <button className ="btn btn-primary m-2" onClick = {()=>onDelete(course.id)} >Delete</button>
                     </tr>)}
                 <tr>
                     total credits: {''}

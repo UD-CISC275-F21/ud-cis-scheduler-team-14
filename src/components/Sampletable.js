@@ -3,7 +3,7 @@ import React from 'react'
 const Sampletable = () => {
     return (
         <div>
-            <table class="table table-striped">
+            <table className="table table-striped">
 <thead>
   <tr>
     <th scope="col" colSpan="6">Computer Science BS Four-Year Plan</th>
