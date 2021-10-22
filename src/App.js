@@ -1,11 +1,11 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import Button from './components/Button'
+//import Button from './components/Button'
 import Header from './components/Header'
 import { useState } from "react"
 import Year from './components/Year';
 import Semester from './components/Semester';
-import AddCourse from './components/AddCourse';
+//import AddCourse from './components/AddCourse';
 import Sampletable from './components/Sampletable';
 
 
