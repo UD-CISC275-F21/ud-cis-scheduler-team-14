@@ -11,7 +11,7 @@ interface IProps{
 }
 
 const Semester:React.FC<IProps> = ({Courses, value, setCourses, editCourse}) => {
-    const [totalCredit, setTotalCredit] = useState<number>(0);
+    // const [totalCredit, setTotalCredit] = useState<number>(0);
 
     const deleteCourse = (id:any) => { 
            setCourses(Courses.filter((course) => course.id !== id))
@@ -44,7 +44,8 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, editCourse}) => 
                 )}     
                 <tr>
                 {/* {Courses.forEach((course)=>{course.credit})} */}
-                total credits: {totalCredit}
+                total credits: 
+                {/* {totalCredit} */}
                 </tr>
             </table>
 
@@ -55,21 +56,3 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, editCourse}) => 
 }
 
 export default Semester
-
-
-{/* <Tabs
-id="controlled-tab-example"
-activeKey={key}
- onSelect={(k:any) => setKey(k)} 
-className="mb-3"
->
-<Tab eventKey="home" title="Home">
-    abc
-</Tab>
-<Tab eventKey="profile" title="Profile">
-    efg
-</Tab>
-<Tab eventKey="contact" title="Contact" disabled>
-    xyz
-</Tab>
-</Tabs> */}

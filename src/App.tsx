@@ -91,7 +91,7 @@ function App() {
   const editCourse = (id:any) => {
     setShowdiagram(true);
     const tmpCourse = fallCourses.filter((res)=>{
-      return res.id == id;
+      return res.id === id;
     });
     setEditTmpId(tmpCourse[0].id); //this line has a fixed number
   }
@@ -102,7 +102,7 @@ function App() {
     let curIndex = 0;
     const curCourse = JSON.parse(JSON.stringify(fallCourses));
     fallCourses.forEach((course,index) => {
-      if (course.id == tmpCourse.id) curIndex = index;
+      if (course.id === tmpCourse.id) curIndex = index;
     })
     curCourse[curIndex] = tmpCourse;
     setFallCourses(curCourse);
