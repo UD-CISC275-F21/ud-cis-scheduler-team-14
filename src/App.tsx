@@ -45,7 +45,7 @@ const defaultOb = {
 function App() {
   const [coursesPool] = useState<CoursePool[]>(COURSESPOOL)
   const [semesterPool] = useState<IState["semesterPool"]>(SEMESTERSPOOL)
-  const [allCourses, setAllCourses] = useState(new Array())
+  const [allCourses, setAllCourses] = useState<any[]>([])
   const [semesterIndex, setSemesterIndex] = useState<number>(0);
   
 
@@ -55,14 +55,14 @@ function App() {
   const [firstSpringCourses, setFirstSpringCourses] = useState<IState["Courses"]>([
     coursesPool[1],coursesPool[2],coursesPool[22],coursesPool[20],coursesPool[21]
   ])
-  const [firstWinterCourses, setFirstWinterCourses] = useState<IState["Courses"]>()
-  const [firstSummerCourses, setFirstSummerCourses] = useState<IState["Courses"]>()
-  const [secondFallCourses, setSecondFallCourses] = useState<IState["Courses"]>([
-    coursesPool[3],coursesPool[4],coursesPool[23],coursesPool[17],coursesPool[26],
-  ])
-  const [secondSpringCourses, setSecondSpringCourses] = useState<IState["Courses"]>([
-    coursesPool[5],coursesPool[13],coursesPool[26],coursesPool[27],coursesPool[28],
-  ])
+  // const [firstWinterCourses, setFirstWinterCourses] = useState<IState["Courses"]>()
+  // const [firstSummerCourses, setFirstSummerCourses] = useState<IState["Courses"]>()
+  // const [secondFallCourses, setSecondFallCourses] = useState<IState["Courses"]>([
+  //   coursesPool[3],coursesPool[4],coursesPool[23],coursesPool[17],coursesPool[26],
+  // ])
+  // const [secondSpringCourses, setSecondSpringCourses] = useState<IState["Courses"]>([
+  //   coursesPool[5],coursesPool[13],coursesPool[26],coursesPool[27],coursesPool[28],
+  // ])
   // const [thirdFallCourses, setThirdFallCourses] = useState<IState["Courses"]>([
   //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
   // ])
@@ -114,11 +114,12 @@ function App() {
   }
   
   const checkPrerequisite=(name:any,courses:any[])=>{
-    if(name==[]){ //how to set equal to empty array
+    console.log(semesterIndex)
+    if(name===[]){ //how to set equal to empty array
       return console.log("list is empty")
     }
     courses.forEach(item=>{
-      if (item.name == name)
+      if (item.name === name)
     return true;
   })
   return false;

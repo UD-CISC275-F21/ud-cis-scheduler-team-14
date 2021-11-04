@@ -22,7 +22,7 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, test
     const editCourse = (id:any) => {
         setShowEditDiagram(true);
         const tmpCourse = Courses.filter((res)=>{
-        return res.id == id;
+        return res.id === id;
         });
         setEditTmpId(tmpCourse[0].id); //this line has a fixed number
       }
@@ -32,7 +32,7 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, test
         let curIndex = 0;
         const curCourse = JSON.parse(JSON.stringify(Courses));
         Courses.forEach((course,index) => {
-            if (course.id == tmpCourse.id) curIndex = index;
+            if (course.id === tmpCourse.id) curIndex = index;
         })
         curCourse[curIndex] = tmpCourse;
         setCourses(curCourse);
