@@ -2,133 +2,150 @@ import React, { useState } from 'react';
 import './App.css';
 import Headers from './components/Header';
 import Year from './components/Year';
-import Semester from './components/Semester';
 import AddCourse from './components/AddCourse';
-import EditCourse from './components/EditCourse';
+import {CoursePool} from './interfaces/coursePool'
+import COURSESPOOL from './assets/coursesPool.json'
+import SEMESTERSPOOL from './assets/semestersPool.json';
 
  export interface IState{
   Courses:{
-    id:number,
-    semester:string,
-    course:string,
-    description?:string,
-    credit:number;
-  }[] //do not forget!!!!!!
-  value:string
-  showSemester:boolean;
-  showSecondSemester:boolean;
+    id:number
+    name:string
+    description?:string
+    credit:number
+    prerequisite:Array<string> //  ?? string[]
+    required:boolean
+    elective:boolean
+  }[] 
 
+  semesterPool:{
+    name:string
+  }[]
+  allCourses: {
+    id: number;
+    name: string;
+    description?: string | undefined;
+    credit: number;
+    prerequisite: string[];
+    required: boolean;
+    elective: boolean;
+}[][] | undefined
+}
+
+const defaultOb = {
+  "id":1,
+  "name":"",
+  "description":"",
+  "credit":0,
+  "prerequisite":[],
+  "required":true,
+  "elective":false
 }
 
 function App() {
-  const [showdiagram, setShowdiagram] = useState(false);
-  const [showSemester, setShowSemester] = useState(true)
-  const [showSecondSemester, setShowSecondSemester] = useState(true)
-  const [editTmpId,setEditTmpId] = useState<number>(0);
+  const [coursesPool] = useState<CoursePool[]>(COURSESPOOL)
+  const [semesterPool] = useState<IState["semesterPool"]>(SEMESTERSPOOL)
+  const [allCourses, setAllCourses] = useState(new Array())
+  const [semesterIndex, setSemesterIndex] = useState<number>(0);
+  
 
-  const [fallCourses, setFallCourses] = useState<IState["Courses"]>([
-    {
-      id: 11,
-      semester: "fall",
-      course: "cisc275",
-      description: "very hard frontend class",
-      credit: 3
-    },
-    {
-      id: 12,
-      semester: "fall",
-      course: "cisc108",
-      description: "beginner sighs",
-      credit: 3
-    },
-    {
-      id: 13,
-      semester: "fall",
-      course: "cisc220",
-      description: "data structure",
-      credit: 3
-    }
-
+  const [firstFallCourses, setFirstFallCourses] = useState<IState["Courses"]>([
+    coursesPool[0],coursesPool[18],coursesPool[24],coursesPool[25],coursesPool[19],
   ])
-  const [springCourses, setSpringCourses] = useState<IState["Courses"]>([
-    {
-      id: 21,
-      semester: "spring",
-      course: "cisc475",
-      description: "data base",
-      credit: 3
-    },
-    {
-      id: 22,
-      semester: "spring",
-      course: "cisc600",
-      description: "i do not know",
-      credit: 3
-    }
-
+  const [firstSpringCourses, setFirstSpringCourses] = useState<IState["Courses"]>([
+    coursesPool[1],coursesPool[2],coursesPool[22],coursesPool[20],coursesPool[21]
   ])
-  const addCourse = (course:any) => {
-    if(course.semester==="fall"){
-      const id = fallCourses.length + 1;
+  const [firstWinterCourses, setFirstWinterCourses] = useState<IState["Courses"]>()
+  const [firstSummerCourses, setFirstSummerCourses] = useState<IState["Courses"]>()
+  const [secondFallCourses, setSecondFallCourses] = useState<IState["Courses"]>([
+    coursesPool[3],coursesPool[4],coursesPool[23],coursesPool[17],coursesPool[26],
+  ])
+  const [secondSpringCourses, setSecondSpringCourses] = useState<IState["Courses"]>([
+    coursesPool[5],coursesPool[13],coursesPool[26],coursesPool[27],coursesPool[28],
+  ])
+  // const [thirdFallCourses, setThirdFallCourses] = useState<IState["Courses"]>([
+  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
+  // ])
+  // const [thirdSpringCourses, setThirdSpringCourses] = useState<IState["Courses"]>([
+  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
+  // ])
+  // const [fourthFallCourses, setFourthFallCourses] = useState<IState["Courses"]>([
+  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
+  // ])
+  // const [fourthSpringCourses, setFourthSpringCourses] = useState<IState["Courses"]>([
+  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
+  // ])
+  allCourses.push(firstFallCourses,firstSpringCourses)
+  // allCourses.push(firstSpringCourses)
+  
+  const addCourse = (course:any,semester:any) => { //{newCourse, semester}
+    console.log("addCourse"+course.name)
+    if(semester==="First Year Fall"){
+      const id = firstFallCourses.length + 1;
       const newCourse = { id, ...course }
-      setFallCourses([...fallCourses, newCourse])
+      setFirstFallCourses([...firstFallCourses, newCourse])
     }
-    else if(course.semester==="spring"){
-      const id = springCourses.length + 1;
+    else if(semester==="First Year Spring"){
+      const id = firstSpringCourses.length + 1;
       const newCourse = { id, ...course }
-      setSpringCourses([...springCourses, newCourse])
+      setFirstSpringCourses([...firstSpringCourses, newCourse])
     }
-
-  }
-  const deleteCourse = (id:any) => { 
-    setFallCourses(fallCourses.filter((course) => course.id !== id))
   }
 
-  const cancelDiagram = () => {
-    setShowdiagram(false);
+  const testAddAllCourses = (newCourses:any)=>{
+    let tmpCourse = allCourses;
+    tmpCourse.push(newCourses);
+    setAllCourses(tmpCourse);
   }
 
-  const editCourse = (id:any) => {
-    setShowdiagram(true);
-    const tmpCourse = fallCourses.filter((res)=>{
-      return res.id === id;
-    });
-    setEditTmpId(tmpCourse[0].id); //this line has a fixed number
-  }
-
-  const editAddCourse=(tmpCourse:any)=>{
-    // setFallCourses(fallCourses.filter((course) => {return course.id !== tmpCourse.id}))
-    // const newFallCourses = fallCourses.filter((course) => {return course.id !== tmpCourse.id})
+  const searchCourse=(name:any)=>{
+    let tmpAllCourses = coursesPool;
+    let uppercase = name.toUpperCase(name);
     let curIndex = 0;
-    const curCourse = JSON.parse(JSON.stringify(fallCourses));
-    fallCourses.forEach((course,index) => {
-      if (course.id === tmpCourse.id) curIndex = index;
+    let exist = false;
+    tmpAllCourses.forEach((value,index) => {
+      if (value.name===uppercase) {
+        curIndex = index;
+        exist = true;
+      }
     })
-    curCourse[curIndex] = tmpCourse;
-    setFallCourses(curCourse);
-    setShowdiagram(false);
+    if (exist){ return tmpAllCourses[curIndex]};
+    return defaultOb;
+  }
+  
+  const checkPrerequisite=(name:any,courses:any[])=>{
+    if(name==[]){ //how to set equal to empty array
+      return console.log("list is empty")
+    }
+    courses.forEach(item=>{
+      if (item.name == name)
+    return true;
+  })
+  return false;
+  // return console.log("prerequisite name not found"+item.name);
   }
 
   return (
     <div className="App">
       <Headers/>
-      <AddCourse onAdd={addCourse}/>
-      <Year value = "First Year" setShowSemester={setShowSemester} showSemester={showSemester} onSecondShow={() => setShowSecondSemester(!showSecondSemester)}/>
-      {showdiagram? 
-             <div className='outer-diagram'>
-                 <div className='diagram'>
-                   <EditCourse  editTmpId={editTmpId} setEditTmpId={setEditTmpId} editAddCourse={editAddCourse}/>
-                   <button className='diagram-cancel' onClick={cancelDiagram}>cancal</button>
-                 </div>
-             </div> :
-             <div></div>
-      }
-      <div>
-        {showSemester && <Semester value ="Fall Semester" Courses = {fallCourses}  onDelete={deleteCourse} setCourses={setFallCourses} editCourse={editCourse}/>}
-        {showSecondSemester && <Semester value='Spring Semester' Courses = {springCourses}  onDelete={deleteCourse} setCourses={setSpringCourses} editCourse={editCourse}/>}
-      </div>
+
+      <AddCourse onAdd={addCourse} semesterPool={semesterPool} setSemesterIndex = {setSemesterIndex} 
+      searchCourse={searchCourse} checkPrerequisite = {checkPrerequisite} allCourses = {allCourses}/>
+
+      <Year yearName = "First Year" 
+        fallValue ={semesterPool[0].name} fallCourses = {firstFallCourses}  setfallCourses={setFirstFallCourses}
+        springValue="Spring Semester" springCourses={firstSpringCourses} setSpringCourses={setFirstSpringCourses}
+        allCourses={allCourses} setAllCourses={setAllCourses} testAddAllCourses={testAddAllCourses}
+      />
+      {/* <Year yearName = "Second Year" 
+        fallValue ="Fall Semester" fallCourses = {secondFallCourses}  setfallCourses={setSecondFallCourses}
+        springValue="Spring Semester" springCourses={secondSpringCourses} setSpringCourses={setSecondSpringCourses}
+        allCourses={allCourses} setAllCourses={setAllCourses}
+      /> */}
+      {/* {checkPrerequisite("CISC181", allCourses[1])} */}
+
     </div>
   );
 }
-
 export default App;
+

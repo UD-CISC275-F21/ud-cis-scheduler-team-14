@@ -1,0 +1,265 @@
+[
+    {
+        "id":1,
+        "name":"CISC106",
+        "description":"introduction to code",
+        "credit":3,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":2,
+        "name":"CISC181",
+        "description":"java",
+        "credit":3,
+        "prerequisite":["CISC106"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":3,
+        "name":"CISC210",
+        "description":"language C",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":4,
+        "name":"CISC220",
+        "description":"data strucutre",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC210"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":5,
+        "name":"CISC260",
+        "description":"assembly language",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":6,
+        "name":"CISC275",
+        "description":"data strucutre",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":7,
+        "name":"CISC303",
+        "description":"automata theory",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":8,
+        "name":"CISC304",
+        "description":"logic and programming",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":9,
+        "name":"CISC320",
+        "description":"introduction to algorithms",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":10,
+        "name":"CISC361",
+        "description":"operating system",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":11,
+        "name":"CISC364",
+        "description":"security",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":12,
+        "name":"CISC498",
+        "description":"Computer Science Seniro Design Project I",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":13,
+        "name":"CISC499",
+        "description":"Computer Science Senior Design Project II",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":14,
+        "name":"CISC355",
+        "description":"Computer, Ethics and Scoiety",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":15,
+        "name":"CISC372",
+        "description":"Parallel Computing",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":16,
+        "name":"CISC450",
+        "description":"computer networks I",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":17,
+        "name":"CISC471",
+        "description":"compiller Design",
+        "credit":3,
+        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":18,
+        "name":"MATH210",
+        "description":"Discrete Mathematics",
+        "credit":3,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":19,
+        "name":"MATH241",
+        "description":"Analytic Geometry and Calculus A",
+        "credit":3,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":20,
+        "name":"CHEM103",
+        "description":"General Chemistry I",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":21,
+        "name":"CHEM104",
+        "description":"General Chemistry II",
+        "credit":3,
+        "prerequisite":["CHEM103"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":22,
+        "name":"ENGL312",
+        "description":"Written Communications in Business",
+        "credit":3,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":23,
+        "name":"MATH242",
+        "description":"Calculus B",
+        "credit":3,
+        "prerequisite":["MATH241"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":24,
+        "name":"MATH243",
+        "description":"Calculus C",
+        "credit":3,
+        "prerequisite":["MATH242"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":25,
+        "name":"EGGG101",
+        "description":"intro to engineering",
+        "credit":2,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":26,
+        "name":"ENGL110",
+        "description":"Seminar in composition",
+        "credit":3,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":27,
+        "name":"BHAN120",
+        "description":"physical education",
+        "credit":1,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":28,
+        "name":"THEA241",
+        "description":"a theater class",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":29,
+        "name":"ARSC297",
+        "description":"passport to art",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    }
+
+    
+]

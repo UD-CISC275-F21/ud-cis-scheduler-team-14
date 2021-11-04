@@ -1,29 +1,73 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {IState as Props} from "../App";
-// import { Tabs, Tab } from "react-bootstrap";
+import EditCourse from './EditCourse'
 
 interface IProps{
     Courses:Props["Courses"]
-    value:Props["value"]
-    onDelete: (id: any,semester:any) => void
     setCourses: React.Dispatch<React.SetStateAction<Props["Courses"]>>
-    editCourse: (id:any) => void;
+    value: string
+    allCourses: Props["allCourses"]
+    testAddAllCourses: (newCourses: any) => void
 }
 
-const Semester:React.FC<IProps> = ({Courses, value, setCourses, editCourse}) => {
-    // const [totalCredit, setTotalCredit] = useState<number>(0);
+const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, testAddAllCourses}) => {
+    const [showEditDiagram, setShowEditDiagram] = useState(false);
+    const [editTmpId,setEditTmpId] = useState<number>(0);
+    let totalCredit = 0;
 
     const deleteCourse = (id:any) => { 
            setCourses(Courses.filter((course) => course.id !== id))
-         }
-    // const addCredit = (credit:any) =>{
-    //     setTotalCredit(credit+totalCredit)
+        }
+
+    const editCourse = (id:any) => {
+        setShowEditDiagram(true);
+        const tmpCourse = Courses.filter((res)=>{
+        return res.id == id;
+        });
+        setEditTmpId(tmpCourse[0].id); //this line has a fixed number
+      }
+    const editAddCourse=(tmpCourse:any)=>{
+        // setFallCourses(fallCourses.filter((course) => {return course.id !== tmpCourse.id}))
+        // const newFallCourses = fallCourses.filter((course) => {return course.id !== tmpCourse.id})
+        let curIndex = 0;
+        const curCourse = JSON.parse(JSON.stringify(Courses));
+        Courses.forEach((course,index) => {
+            if (course.id == tmpCourse.id) curIndex = index;
+        })
+        curCourse[curIndex] = tmpCourse;
+        setCourses(curCourse);
+        setShowEditDiagram(false);
+    }
+
+    // const checkPrerequisite=(checkCourse:any)=>{
+    //     let semesterIndex= 0;
+    //     const curAllCourses = JSON.parse(JSON.stringify(allCourses));
+    //     allCourses?.forEach((item,index)=>{
+    //         if(item == Courses) semesterIndex = index;
+    //     })
+    //     console.log("semesterIndex"+semesterIndex)
     // }
 
+    const cancelEditDiagram = () => {
+        setShowEditDiagram(false);
+    }
+
+    const clearCourse=()=>{
+        setCourses([])
+    }
+
+    const countCredit=()=>{
+        Courses.forEach(item=>{
+            totalCredit += item.credit
+        })
+    }
+    
     return (
         <div>
             {value}
-            <button className ="btn btn-primary m-2" onClick={()=>setCourses([])}>Clear</button>
+            {testAddAllCourses(Courses)}
+
+            <button className ="btn btn-primary m-2" onClick={clearCourse}>Clear</button>
             <table className = "table table-striped"  >
                 <thead className="thead-dark">
                     <tr>
@@ -35,7 +79,7 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, editCourse}) => 
                 </thead>
                 {Courses.map(course => <tr key={course.id} >
                 <th scope="row">{course.id}</th>
-                <td>{course.course}</td>
+                <td>{course.name}</td>
                 <td>{course.description}</td>
                 <td>{course.credit}</td>
                 <button className="btn btn-primary m-2" onClick={()=>editCourse(course.id)}>Edit</button>
@@ -43,16 +87,26 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, editCourse}) => 
                 </tr> 
                 )}     
                 <tr>
-                {/* {Courses.forEach((course)=>{course.credit})} */}
-                total credits: 
-                {/* {totalCredit} */}
+                {countCredit()}
+                total credits: {totalCredit}
                 </tr>
             </table>
 
-            {/* {prompt("asd")} */}
+            {showEditDiagram? 
+             <div className='outer-diagram'>
+                 <div className='diagram'>
+                   <EditCourse  editTmpId={editTmpId}  editAddCourse={editAddCourse}/>
+                   <button className='diagram-cancel btn btn-primary' onClick={cancelEditDiagram}>cancal</button>
+                 </div>
+             </div> :
+             <div></div>
+             }
+
+             
         
     </div>
     )
 }
 
 export default Semester
+
