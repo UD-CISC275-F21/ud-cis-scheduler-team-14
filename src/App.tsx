@@ -116,7 +116,7 @@ function App() {
   const checkPrerequisite=(name:any,courses:any[])=>{
     console.log(semesterIndex)
     if(name===[]){ //how to set equal to empty array
-      return console.log("list is empty")
+      return console.log("list is empty!")
     }
     courses.forEach(item=>{
       if (item.name === name)
