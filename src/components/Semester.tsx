@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {IState as Props} from "../App";
 import EditCourse from './EditCourse'
+//import {Table} from 'react-bootstrap'
 
 interface IProps{
     Courses:Props["Courses"]
@@ -8,21 +9,24 @@ interface IProps{
     value: string
     allCourses: Props["allCourses"]
     testAddAllCourses: (newCourses: any) => void
+    sortCoursesId: (courses: Props["Courses"]) => void
+
 }
 
-const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, testAddAllCourses}) => {
+const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, testAddAllCourses, sortCoursesId}) => {
     const [showEditDiagram, setShowEditDiagram] = useState(false);
     const [editTmpId,setEditTmpId] = useState<number>(0);
     let totalCredit = 0;
 
-    const deleteCourse = (id:any) => { 
-           setCourses(Courses.filter((course) => course.id !== id))
+    const deleteCourse = (name:any) => { 
+           setCourses(Courses.filter((course) => course.name !== name))
+        //    console.log("deleted id: "+ id)
         }
 
     const editCourse = (id:any) => {
         setShowEditDiagram(true);
         const tmpCourse = Courses.filter((res)=>{
-        return res.id === id;
+        return res.id == id;
         });
         setEditTmpId(tmpCourse[0].id); //this line has a fixed number
       }
@@ -32,7 +36,7 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, test
         let curIndex = 0;
         const curCourse = JSON.parse(JSON.stringify(Courses));
         Courses.forEach((course,index) => {
-            if (course.id === tmpCourse.id) curIndex = index;
+            if (course.id == tmpCourse.id) curIndex = index;
         })
         curCourse[curIndex] = tmpCourse;
         setCourses(curCourse);
@@ -65,10 +69,12 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, test
     return (
         <div>
             {value}
-            {testAddAllCourses(Courses)}
+            {/* {testAddAllCourses(Courses)} */}
+            {sortCoursesId(Courses)}
+
 
             <button className ="btn btn-primary m-2" onClick={clearCourse}>Clear</button>
-            <table className = "table table-striped"  >
+            <table  className = "table table-striped"  >
                 <thead className="thead-dark">
                     <tr>
                     <th scope="col">#</th>
@@ -77,13 +83,13 @@ const Semester:React.FC<IProps> = ({Courses, value, setCourses, allCourses, test
                     <th scope="col">Credit</th>
                     </tr>
                 </thead>
-                {Courses.map(course => <tr key={course.id} >
+                {Courses.map(course => <tr key={course.id} draggable >
                 <th scope="row">{course.id}</th>
-                <td>{course.name}</td>
-                <td>{course.description}</td>
-                <td>{course.credit}</td>
+                <td draggable >{course.name}</td>
+                <td draggable>{course.description}</td>
+                <td >{course.credit}</td>
                 <button className="btn btn-primary m-2" onClick={()=>editCourse(course.id)}>Edit</button>
-                <button className="btn btn-primary m-2"  onClick={()=>deleteCourse(course.id)}>Delete</button>
+                <button className="btn btn-primary m-2"  onClick={()=>deleteCourse(course.name)}>Delete</button>
                 </tr> 
                 )}     
                 <tr>

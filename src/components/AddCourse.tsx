@@ -40,17 +40,17 @@ const AddCourse:React.FC<IProps> = ({onAdd, semesterPool, setSemesterIndex, sear
         
 
         // const prerequisiteClasses = tmpCourse.prerequisite;
-        let previousCourses = allCourses;
-        previousCourses.filter(index=> index<curIndex)
-        previousCourses.forEach(item=>console.log(item)) //not finished
+        // let previousCourses = allCourses;
+        // previousCourses.filter(index=> index<curIndex)
+        // previousCourses.forEach(item=>console.log(item)) //not finished
 
         // let notSatisfiedCourses = new Array();
         // prerequisiteClasses.forEach(item=>{
-        //     if(checkPrerequisite(item,allCourses[curIndex])===false){
+        //     if(checkPrerequisite(item,allCourses[curIndex])==false){
         //         notSatisfiedCourses.push(item)
         //     }
         // })
-        console.log("semester index: "+ curIndex)
+        // console.log("semester index: "+ curIndex)
         // console.log("notSatisfiedCourses: "+ notSatisfiedCourses);
         // console.log("allCourses[curIndex]: "+ previousCourses[curIndex].forEach(item=>console.log(item.name)))
     

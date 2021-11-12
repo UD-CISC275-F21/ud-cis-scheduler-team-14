@@ -32,11 +32,12 @@ interface IProps{
 
     setAllCourses: React.Dispatch<React.SetStateAction<any[]>>
     testAddAllCourses: (newCourses: any) => void
+    sortCoursesId: (courses: Props["Courses"]) => void
 }
 
 const Year:React.FC<IProps> = (
     { yearName,fallValue,fallCourses,setfallCourses
-        ,springValue,springCourses,setSpringCourses,allCourses,testAddAllCourses }) => {
+        ,springValue,springCourses,setSpringCourses,allCourses,testAddAllCourses, sortCoursesId}) => {
 
     const [showFirstSemester,setShowFirstSemester] = useState<Boolean>(true);
     const [showSecondSemester, setShowSecondSemester] = useState<Boolean>(true);
@@ -49,11 +50,11 @@ const Year:React.FC<IProps> = (
 
             {showFirstSemester && 
             <Semester value ={fallValue} Courses = {fallCourses} setCourses= {setfallCourses} 
-                allCourses={allCourses}   testAddAllCourses={testAddAllCourses}/>}
+                allCourses={allCourses}   testAddAllCourses={testAddAllCourses} sortCoursesId = {sortCoursesId}/>}
 
             {showSecondSemester && 
             <Semester value={springValue} Courses = {springCourses} setCourses={setSpringCourses} 
-            allCourses={allCourses}  testAddAllCourses={testAddAllCourses}/>}
+            allCourses={allCourses}  testAddAllCourses={testAddAllCourses}sortCoursesId = {sortCoursesId}/>}
     </div>
     )
 }
