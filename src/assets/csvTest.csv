@@ -1,0 +1,2 @@
+"id","name","description","credit","prerequisite","required","elective"
+1,"csvTest101","csvTest101description",3, ,true, false
