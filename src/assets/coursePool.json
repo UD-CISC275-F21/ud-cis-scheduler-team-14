@@ -1,7 +1,8 @@
 [
     {
-        "id":1,
-        "name":"CISC106",
+        
+        "id":"CISC106",
+        "name":"106name",
         "description":"introduction to code",
         "credit":3,
         "prerequisite":[],
@@ -9,8 +10,9 @@
         "elective":false
     },
     {
-        "id":2,
-        "name":"CISC181",
+        
+        "id":"CISC181",
+        "name":"181name",
         "description":"java",
         "credit":3,
         "prerequisite":["CISC106"],
@@ -18,8 +20,9 @@
         "elective":false
     },
     {
-        "id":3,
-        "name":"CISC210",
+        
+        "id":"CISC210",
+        "name":"210name",
         "description":"language C",
         "credit":3,
         "prerequisite":["CISC106","CISC181"],
@@ -27,8 +30,9 @@
         "elective":false
     },
     {
-        "id":4,
-        "name":"CISC220",
+        
+        "id":"CISC220",
+        "name":"220name",
         "description":"data strucutre",
         "credit":3,
         "prerequisite":["CISC106","CISC181","CISC210"],
@@ -36,125 +40,127 @@
         "elective":false
     },
     {
-        "id":5,
-        "name":"CISC260",
+        
+        "id":"CISC260",
+        "name":"260name",
         "description":"assembly language",
         "credit":3,
-        "prerequisite":["CISC106","CISC181"],
+        "prerequisite":["CISC106","CISC181", "CISC210"],
         "required":true,
         "elective":false
     },
     {
-        "id":6,
-        "name":"CISC275",
-        "description":"data strucutre",
+        
+        "id":"CISC275",
+        "name":"275name",
+        "description":"front-end design",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":7,
-        "name":"CISC303",
+        "id":"CISC303",
+        "name":"303name",
         "description":"automata theory",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":8,
-        "name":"CISC304",
+        "id":"CISC304",
+        "name":"304name",
         "description":"logic and programming",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":false,
         "elective":false
     },
     {
-        "id":9,
-        "name":"CISC320",
+        "id":"CISC320",
+        "name":"305name",
         "description":"introduction to algorithms",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":10,
-        "name":"CISC361",
+        "id":"CISC361",
+        "name":"306name",
         "description":"operating system",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":11,
-        "name":"CISC364",
+        "id":"CISC364",
+        "name":"364name",
         "description":"security",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":false,
         "elective":false
     },
     {
-        "id":12,
-        "name":"CISC498",
+        "id":"CISC498",
+        "name":"test",
         "description":"Computer Science Seniro Design Project I",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":13,
-        "name":"CISC499",
+        "id":"CISC499",
+        "name":"test",
         "description":"Computer Science Senior Design Project II",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":14,
-        "name":"CISC355",
+        "id":"CISC355",
+        "name":"test",
         "description":"Computer, Ethics and Scoiety",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":15,
-        "name":"CISC372",
+        "id":"CISC372",
+        "name":"test",
         "description":"Parallel Computing",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":16,
-        "name":"CISC450",
+        "id":"CISC450",
+        "name":"test",
         "description":"computer networks I",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":17,
-        "name":"CISC471",
+        "id":"CISC471",
+        "name":"test",
         "description":"compiller Design",
         "credit":3,
-        "prerequisite":["CISC106","CISC181","CISC2220"],
+        "prerequisite":["CISC106","CISC181","CISC220"],
         "required":true,
         "elective":false
     },
     {
-        "id":18,
-        "name":"MATH210",
+        "id":"MATH210",
+        "name":"test",
         "description":"Discrete Mathematics",
         "credit":3,
         "prerequisite":[],
@@ -162,8 +168,8 @@
         "elective":false
     },
     {
-        "id":19,
-        "name":"MATH241",
+        "id":"MATH241",
+        "name":"test",
         "description":"Analytic Geometry and Calculus A",
         "credit":3,
         "prerequisite":[],
@@ -171,8 +177,8 @@
         "elective":false
     },
     {
-        "id":20,
-        "name":"CHEM103",
+        "id":"CHEM103",
+        "name":"test",
         "description":"General Chemistry I",
         "credit":3,
         "prerequisite":[],
@@ -180,8 +186,8 @@
         "elective":false
     },
     {
-        "id":21,
-        "name":"CHEM104",
+        "id":"CHEM104",
+        "name":"test",
         "description":"General Chemistry II",
         "credit":3,
         "prerequisite":["CHEM103"],
@@ -189,8 +195,8 @@
         "elective":false
     },
     {
-        "id":22,
-        "name":"ENGL312",
+        "id":"ENGL312",
+        "name":"test",
         "description":"Written Communications in Business",
         "credit":3,
         "prerequisite":[],
@@ -198,8 +204,8 @@
         "elective":false
     },
     {
-        "id":23,
-        "name":"MATH242",
+        "id":"MATH242",
+        "name":"test",
         "description":"Calculus B",
         "credit":3,
         "prerequisite":["MATH241"],
@@ -207,8 +213,8 @@
         "elective":false
     },
     {
-        "id":24,
-        "name":"MATH243",
+        "id":"MATH243",
+        "name":"test",
         "description":"Calculus C",
         "credit":3,
         "prerequisite":["MATH242"],
@@ -216,8 +222,8 @@
         "elective":false
     },
     {
-        "id":25,
-        "name":"EGGG101",
+        "id":"EGGG101",
+        "name":"test",
         "description":"intro to engineering",
         "credit":2,
         "prerequisite":[],
@@ -225,8 +231,8 @@
         "elective":false
     },
     {
-        "id":26,
-        "name":"ENGL110",
+        "id":"ENGL110",
+        "name":"test",
         "description":"Seminar in composition",
         "credit":3,
         "prerequisite":[],
@@ -234,8 +240,8 @@
         "elective":false
     },
     {
-        "id":27,
-        "name":"BHAN120",
+        "id":"BHAN120",
+        "name":"test",
         "description":"physical education",
         "credit":1,
         "prerequisite":[],
@@ -243,8 +249,8 @@
         "elective":false
     },
     {
-        "id":28,
-        "name":"THEA241",
+        "id":"THEA241",
+        "name":"test",
         "description":"a theater class",
         "credit":3,
         "prerequisite":[],
@@ -252,8 +258,8 @@
         "elective":false
     },
     {
-        "id":29,
-        "name":"ARSC297",
+        "id":"ARSC297",
+        "name":"test",
         "description":"passport to art",
         "credit":3,
         "prerequisite":[],
