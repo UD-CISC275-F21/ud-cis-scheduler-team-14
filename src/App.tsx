@@ -1,192 +1,169 @@
 import React, { useState } from 'react';
 import './App.css';
-import Headers from './components/Header';
-import Year from './components/Year';
-import AddCourse from './components/AddCourse';
-import {CoursePool} from './interfaces/coursePool'
-import COURSESPOOL from './assets/coursesPool.json'
-import SEMESTERSPOOL from './assets/semestersPool.json';
+import {Col, Row ,Button} from 'react-bootstrap';
+import SemesterBoard from './components/SemesterBoard';
+import COURSEPOOLJSON from './assets/coursePool.json'
+import AddCourseForm from './components/AddCourseForm';
 import { tsXLXS } from 'ts-xlsx-export';
+import Header from './components/Header';
+import DraggableCourse from './components/DraggableCourse';
 
 
- export interface IState{
-  Courses:{
-    id:number
-    name:string
-    description?:string
-    credit:number
-    prerequisite:Array<string> //  ?? string[]
-    required:boolean
-    elective:boolean
-  }[] 
-
-  semesterPool:{
-    name:string
-  }[]
-  allCourses: {
-    id: number;
-    name: string;
-    description?: string | undefined;
-    credit: number;
-    prerequisite: string[];
-    required: boolean;
-    elective: boolean;
-}[][] | undefined
-}
-
+const coursePool = COURSEPOOLJSON
+export const LOCAL_STRORAGE_COURSES = 'current-courses'
+const defaultSemester = [
+  {semesterName: "first fall", semesterCourses:[coursePool[0]]},
+  {semesterName:"first spring", semesterCourses:[coursePool[1],coursePool[2], coursePool[3]]}
+]
+const defaultSemesterPool = ["first fall", "first spring"]
 const defaultOb = {
-  "id":1,
+  "id":"not found",
   "name":"",
   "description":"",
   "credit":0,
   "prerequisite":[],
-  "required":true,
+  "required":false,
   "elective":false
 }
-export const coursesPool = COURSESPOOL
-export const LOCAL_STRORAGE_COURSES = 'current-courses'
-export const INITAL_COURSES = [
-  coursesPool[0],coursesPool[18],coursesPool[24],coursesPool[25]
-]
-export const getLocalStrorageCourses = ()=>{
+export const getLocalStorageCourses = ()=>{
   let defaultCourses : string| null= localStorage.getItem((LOCAL_STRORAGE_COURSES)) //need if statement because 'null' problem
   if(defaultCourses===null){
-    return [...INITAL_COURSES]
+    return [...defaultSemester]
   }else{
     return JSON.parse(defaultCourses)
   }
 }
+const getLocalStorageSemester=()=>{
+  let tmpSemesterPool:string[] = []
+  let defaultCourses : string| null= localStorage.getItem((LOCAL_STRORAGE_COURSES)) //need if statement because 'null' problem
+  if(defaultCourses===null){
+    return defaultSemesterPool
+  }
+  else{
+    let tmpDefaultCourses:{
+      semesterName: string;
+      semesterCourses: {
+          id: string;
+          name: string;
+          description: string;
+          credit: number;
+          prerequisite: string[];
+          required: boolean;
+          elective: boolean;
+      }[];
+    }[] = JSON.parse(defaultCourses)
+    tmpDefaultCourses.forEach(semester=>tmpSemesterPool.push(semester.semesterName))
+    console.log("tmpSemesterPool: "+tmpSemesterPool)
+    return tmpSemesterPool
+  }
+} 
+
 
 function App() {
-  // const [coursesPool] = useState<CoursePool[]>(COURSESPOOL)
-  const [semesterPool] = useState<IState["semesterPool"]>(SEMESTERSPOOL)
-  const [allCourses, setAllCourses] = useState(new Array())
-  const [semesterIndex, setSemesterIndex] = useState<number>(0);
+  const [AllUserCourses, setAllUserCourses] = useState<{
+    semesterName: string;
+    semesterCourses: {
+        id: string;
+        name: string;
+        description: string;
+        credit: number;
+        prerequisite: string[];
+        required: boolean;
+        elective: boolean;
+    }[];
+  }[]>(getLocalStorageCourses())
+  const [semesterPool, setSemesterPool] = useState<string[]>(getLocalStorageSemester())
 
-  const [firstFallCourses, setFirstFallCourses] = useState<IState["Courses"]>(getLocalStrorageCourses())
-  const [firstSpringCourses, setFirstSpringCourses] = useState<IState["Courses"]>([
-    coursesPool[1],coursesPool[2],coursesPool[22],coursesPool[20],coursesPool[21]
-  ])
-  // const [secondFallCourses, setSecondFallCourses] = useState<IState["Courses"]>([
-  //   coursesPool[3],coursesPool[4],coursesPool[23],coursesPool[17],coursesPool[26],
-  // ])
-  // const [secondSpringCourses, setSecondSpringCourses] = useState<IState["Courses"]>([
-  //   coursesPool[5],coursesPool[13],coursesPool[26],coursesPool[27],coursesPool[28],
-  // ])
-  // const [thirdFallCourses, setThirdFallCourses] = useState<IState["Courses"]>([
-  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
-  // ])
-  // const [thirdSpringCourses, setThirdSpringCourses] = useState<IState["Courses"]>([
-  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
-  // ])
-  // const [fourthFallCourses, setFourthFallCourses] = useState<IState["Courses"]>([
-  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
-  // ])
-  // const [fourthSpringCourses, setFourthSpringCourses] = useState<IState["Courses"]>([
-  //   coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],coursesPool[0],
-  // ])
-  allCourses.push(firstFallCourses,firstSpringCourses)
-  // allCourses.push(firstSpringCourses)
+  const addSemester=()=>{
+    let newSemesterName = semesterPool.length+1
+    let tmpSemesterPool = semesterPool
+    tmpSemesterPool.push("semester "+newSemesterName)
+    setAllUserCourses([ ...AllUserCourses,{semesterName: "semester "+newSemesterName, semesterCourses:[]} ])
+    setSemesterPool(tmpSemesterPool)
+
+  }
+  const addCourse = (course:{
+                              id: string;
+                              name: string;
+                              description: string;
+                              credit: number;
+                              prerequisite: string[];
+                              required: boolean;
+                              elective: boolean;
+                          },semesterIndex:number) => { 
+      
+        let tmpAllUserCourses = AllUserCourses;
+        tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,course]
+        setAllUserCourses(tmpAllUserCourses)
+        alert("add success")
+      
+  }
   
-  const addCourse = (course:any,semester:any) => { //{newCourse, semester}
-    // console.log("addCourse"+course.name)
-    if(semester==="First Year Fall"){
-      const id = firstFallCourses.length + 1;
-      // const newCourse = { id, ...course }
-      course.id = id;
-      setFirstFallCourses([...firstFallCourses, course])
-      // sortCoursesId(firstFallCourses)
-
-    }
-    else if(semester==="First Year Spring"){
-      const id = firstSpringCourses.length + 1;
-      const newCourse = { id, ...course }
-      setFirstSpringCourses([...firstSpringCourses, newCourse])
-    }
-  }
-  const sortCoursesId = (courses:IState["Courses"])=>{
-    let index = 1;
-    courses.forEach(item => {item.id=index
-      index+=1})
-  }
-
-  const testAddAllCourses = (newCourses:any)=>{
-    let tmpCourse = allCourses;
-    tmpCourse.push(newCourses);
-    setAllCourses(tmpCourse);
-  }
-
-  const searchCourse=(name:any)=>{
-    let tmpAllCourses = coursesPool;
-    let uppercase = name.toUpperCase(name);
+  const searchCourse=(id:string)=>{
+    let tmpAllUserCourses = coursePool;
+    let uppercase = id.toUpperCase();
     let curIndex = 0;
     let exist = false;
-    tmpAllCourses.forEach((value,index) => {
-      if (value.name===uppercase) {
+    tmpAllUserCourses.forEach((value,index) => {
+      if (value.id===uppercase) {
         curIndex = index;
         exist = true;
       }
     })
-    if (exist){ return tmpAllCourses[curIndex]};
+    if (exist){ return tmpAllUserCourses[curIndex]};
     return defaultOb;
   }
-  
-  const checkPrerequisite=(name:any,courses:any[])=>{
-    if(name==[]){ //how to set equal to empty array
-      return console.log("list is empty")
-    }
-    courses.forEach(item=>{
-      if (item.name == name)
-    return true;
-  })
-  return false;
-  // return console.log("prerequisite name not found"+item.name);
-  }
-
   const save=()=>{
-    console.log("saved")
-    localStorage.setItem(LOCAL_STRORAGE_COURSES,JSON.stringify(firstFallCourses))
+    localStorage.setItem(LOCAL_STRORAGE_COURSES,JSON.stringify(AllUserCourses))
   }
 
   const exportAsExcelFile =()=>{
-    tsXLXS().exportAsExcelFile(firstSpringCourses).saveAsExcelFile('FourYearPlan')
-  } //extension auto applie
+    tsXLXS().exportAsExcelFile(AllUserCourses).saveAsExcelFile('FourYearPlan')
+  } //extension auto applie , not working 
 
-  // const importExcelFile=()=>{
-  //   const fs = require("fs")
-  //   const XLSX = require("xlsx")
-  //   // const jsontoxml = require("jsontoxml")
-  //    const workbook = XLSX.readFile("csvTest.csv")
-  //    return workbook;
-  // }
+  const checkPrerequisite=(requiredCourseId:string, semesterIndex:number)=>{
+    let tmpPreviousCourses= AllUserCourses
+    let isSatisfy = false;
+    tmpPreviousCourses=AllUserCourses.filter((item, index)=> index<semesterIndex)
+    // console.log("tmpPreviousCourses: "+tmpPreviousCourses.map(item=>item.semesterCourses.map(item=>item.id))+
+    // "semesterIndex: "+semesterIndex)
 
+    tmpPreviousCourses.map(course=>course.semesterCourses.map((item, index)=>{
+      if(item.id === requiredCourseId)
+        isSatisfy = true
+        return isSatisfy
+    }
+    ))
+    // console.log("requiredCourseId: "+requiredCourseId+" isSatisfy: "+ isSatisfy)
+    return isSatisfy    
+  }
 
 
   return (
+    
     <div className="App">
-      <Headers save = {save} exportAsExcelFile = {exportAsExcelFile}/>
+      <Row>
+        <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
+        <Col >
+          <h1>Course Pool</h1>
+          <h3>drag to semester table</h3>
+          {coursePool.map(course=><DraggableCourse id={course.id} />)}
+        </Col>
+        <Col>
+          <Button className="btn btn-primary m-2" onClick={()=>addSemester() }>Add Semester</Button>
 
-      <AddCourse onAdd={addCourse} semesterPool={semesterPool} setSemesterIndex = {setSemesterIndex} 
-      searchCourse={searchCourse} checkPrerequisite = {checkPrerequisite} allCourses = {allCourses}/>
-
-      <Year yearName = "First Year" 
-        fallValue ={semesterPool[0].name} fallCourses = {firstFallCourses}  setfallCourses={setFirstFallCourses}
-        springValue="Spring Semester" springCourses={firstSpringCourses} setSpringCourses={setFirstSpringCourses}
-        allCourses={allCourses} setAllCourses={setAllCourses} testAddAllCourses={testAddAllCourses}
-        sortCoursesId = {sortCoursesId}
-      />
-      {/* <Year yearName = "Second Year" 
-        fallValue ="Fall Semester" fallCourses = {secondFallCourses}  setfallCourses={setSecondFallCourses}
-        springValue="Spring Semester" springCourses={secondSpringCourses} setSpringCourses={setSecondSpringCourses}
-        allCourses={allCourses} setAllCourses={setAllCourses}
-        sortCoursesId = {sortCoursesId}
-      /> */}
-      {/* {checkPrerequisite("CISC181", allCourses[1])} */}
-
-
+          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite} defaultOb={defaultOb}/>
+          
+          {AllUserCourses.map((semester, index)=> <SemesterBoard semester = {semester} semesterIndex = {index} 
+                                                semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
+                                                AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
+          }
+        </Col>
+      </Row>
 
     </div>
+    
   );
 }
-export default App;
 
+export default App;
