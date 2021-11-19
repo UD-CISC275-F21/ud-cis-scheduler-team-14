@@ -1,11 +1,10 @@
 import React from 'react'
-interface IProps{
-    save :()=> void
+export interface Headers{
+    save: ()=>void
     exportAsExcelFile: () => void
 }
 
-const Headers:React.FC<IProps> = ({save, exportAsExcelFile}) => {
-
+const Header = ({save, exportAsExcelFile}: Headers) => {
     return (
         <nav>
             <header className="navbar navbar-light bg-light">CS Major Four Year Plan 
@@ -17,5 +16,5 @@ const Headers:React.FC<IProps> = ({save, exportAsExcelFile}) => {
         </nav>
     )
 }
-
-export default Headers
+    
+export default Header
