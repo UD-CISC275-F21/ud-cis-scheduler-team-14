@@ -123,7 +123,7 @@ function App() {
         </Col>
         <Col>
           <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
-          <button className="btn btn-primary m-2" onClick={()=>addSemester() }>Add Semester</button>
+          <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
 
           <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite} 
               defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
