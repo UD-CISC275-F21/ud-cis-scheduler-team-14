@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDrag } from 'react-dnd';
-export interface draggableCourse{
+export interface poolOfCourse{
     id: string
 }
 
-const DraggableCourse = ({ id}:draggableCourse) => {
+const PoolOfCourse = ({ id}:poolOfCourse) => {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "string",
@@ -21,4 +21,4 @@ const DraggableCourse = ({ id}:draggableCourse) => {
     )
 }
 
-export default DraggableCourse
+export default PoolOfCourse

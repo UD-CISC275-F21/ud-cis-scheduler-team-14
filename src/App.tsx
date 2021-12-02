@@ -6,7 +6,7 @@ import COURSEPOOLJSON from './assets/coursePool.json'
 import AddCourseForm from './components/AddCourseForm';
 import { tsXLXS } from 'ts-xlsx-export';
 import Header from './components/Header';
-import DraggableCourse from './components/DraggableCourse';
+import PoolOfCourse from './components/PoolOfCourse';
 
 
 const coursePool = COURSEPOOLJSON
@@ -165,7 +165,7 @@ function App() {
         <Col >
           <h1>Course Pool</h1>
           <h3>drag to semester table</h3>
-          {coursePool.map(course=><DraggableCourse id={course.id} />)}
+          {coursePool.map(course=><PoolOfCourse id={course.id} />)}
         </Col>
         <Col>
           <Button className="btn btn-primary m-2" onClick={()=>addSemester() }>Add Semester</Button>
