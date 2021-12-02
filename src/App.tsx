@@ -138,6 +138,24 @@ function App() {
     return isSatisfy    
   }
 
+  const editDbCourse=(tmpCourse:{
+    id: string;
+    name: string;
+    description: string;
+    credit: number;
+    prerequisite: string[];
+    required: boolean;
+    elective: boolean;
+})=>{
+    let tmpCoursePool = coursePool;
+    let curIndex = 0;
+    tmpCoursePool.forEach((course,index)=>{if (course.id === tmpCourse.id) curIndex = index;
+    })
+    tmpCoursePool[curIndex] = tmpCourse;
+    // setCoursePool(tmpCoursePool)
+    //not finished
+}
+
 
   return (
     
@@ -152,7 +170,8 @@ function App() {
         <Col>
           <Button className="btn btn-primary m-2" onClick={()=>addSemester() }>Add Semester</Button>
 
-          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite} defaultOb={defaultOb}/>
+          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} 
+          checkPrerequisite={checkPrerequisite} defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
           
           {AllUserCourses.map((semester, index)=> <SemesterBoard semester = {semester} semesterIndex = {index} 
                                                 semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
