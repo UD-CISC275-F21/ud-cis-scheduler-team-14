@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
 import './App.css';
-import {Col, Row ,Button} from 'react-bootstrap';
+import {Col, Row } from 'react-bootstrap';
 import SemesterBoard from './components/SemesterBoard';
 import COURSEPOOLJSON from './assets/coursePool.json'
 import AddCourseForm from './components/AddCourseForm';
 import { tsXLXS } from 'ts-xlsx-export';
 import Header from './components/Header';
 import PoolOfCourse from './components/PoolOfCourse';
+import DegreeRequirementForm from './components/DegreeRequirementForm';
+import Tutorials from './components/Tutorials';
+import { AllUserCoursesType, courseType, defaultOb} from './interfaces/coursePool';
 
 
 const coursePool = COURSEPOOLJSON
 export const LOCAL_STRORAGE_COURSES = 'current-courses'
-const defaultSemester = [
-  {semesterName: "first fall", semesterCourses:[coursePool[0]]},
-  {semesterName:"first spring", semesterCourses:[coursePool[1],coursePool[2], coursePool[3]]}
+export const defaultSemester = [
+  {semesterName: "First Fall", semesterCourses:[coursePool[0]]},
+  {semesterName:"First Spring", semesterCourses:[coursePool[1],coursePool[2]]}
 ]
-const defaultSemesterPool = ["first fall", "first spring"]
-const defaultOb = {
-  "id":"not found",
-  "name":"",
-  "description":"",
-  "credit":0,
-  "prerequisite":[],
-  "required":false,
-  "elective":false
-}
+export const defaultSemesterPool = [defaultSemester[0].semesterName,defaultSemester[1].semesterName]
+
 export const getLocalStorageCourses = ()=>{
   let defaultCourses : string| null= localStorage.getItem((LOCAL_STRORAGE_COURSES)) //need if statement because 'null' problem
   if(defaultCourses===null){
@@ -40,18 +35,7 @@ const getLocalStorageSemester=()=>{
     return defaultSemesterPool
   }
   else{
-    let tmpDefaultCourses:{
-      semesterName: string;
-      semesterCourses: {
-          id: string;
-          name: string;
-          description: string;
-          credit: number;
-          prerequisite: string[];
-          required: boolean;
-          elective: boolean;
-      }[];
-    }[] = JSON.parse(defaultCourses)
+    let tmpDefaultCourses:AllUserCoursesType = JSON.parse(defaultCourses)
     tmpDefaultCourses.forEach(semester=>tmpSemesterPool.push(semester.semesterName))
     console.log("tmpSemesterPool: "+tmpSemesterPool)
     return tmpSemesterPool
@@ -60,37 +44,18 @@ const getLocalStorageSemester=()=>{
 
 
 function App() {
-  const [AllUserCourses, setAllUserCourses] = useState<{
-    semesterName: string;
-    semesterCourses: {
-        id: string;
-        name: string;
-        description: string;
-        credit: number;
-        prerequisite: string[];
-        required: boolean;
-        elective: boolean;
-    }[];
-  }[]>(getLocalStorageCourses())
+  const [AllUserCourses, setAllUserCourses] = useState<AllUserCoursesType>(getLocalStorageCourses())
   const [semesterPool, setSemesterPool] = useState<string[]>(getLocalStorageSemester())
 
   const addSemester=()=>{
     let newSemesterName = semesterPool.length+1
     let tmpSemesterPool = semesterPool
-    tmpSemesterPool.push("semester "+newSemesterName)
-    setAllUserCourses([ ...AllUserCourses,{semesterName: "semester "+newSemesterName, semesterCourses:[]} ])
+    tmpSemesterPool.push("new semester "+newSemesterName)
+    setAllUserCourses([ ...AllUserCourses,{semesterName: "new semester "+newSemesterName, semesterCourses:[]} ])
     setSemesterPool(tmpSemesterPool)
 
   }
-  const addCourse = (course:{
-                              id: string;
-                              name: string;
-                              description: string;
-                              credit: number;
-                              prerequisite: string[];
-                              required: boolean;
-                              elective: boolean;
-                          },semesterIndex:number) => { 
+  const addCourse = (course:courseType,semesterIndex:number) => { 
       
         let tmpAllUserCourses = AllUserCourses;
         tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,course]
@@ -127,26 +92,14 @@ function App() {
     tmpPreviousCourses=AllUserCourses.filter((item, index)=> index<semesterIndex)
     // console.log("tmpPreviousCourses: "+tmpPreviousCourses.map(item=>item.semesterCourses.map(item=>item.id))+
     // "semesterIndex: "+semesterIndex)
-
     tmpPreviousCourses.map(course=>course.semesterCourses.map((item, index)=>{
       if(item.id === requiredCourseId)
         isSatisfy = true
         return isSatisfy
-    }
-    ))
-    // console.log("requiredCourseId: "+requiredCourseId+" isSatisfy: "+ isSatisfy)
+    }))
     return isSatisfy    
   }
-
-  const editDbCourse=(tmpCourse:{
-    id: string;
-    name: string;
-    description: string;
-    credit: number;
-    prerequisite: string[];
-    required: boolean;
-    elective: boolean;
-})=>{
+  const editDbCourse=(tmpCourse:courseType)=>{
     let tmpCoursePool = coursePool;
     let curIndex = 0;
     tmpCoursePool.forEach((course,index)=>{if (course.id === tmpCourse.id) curIndex = index;
@@ -155,31 +108,33 @@ function App() {
     // setCoursePool(tmpCoursePool)
     //not finished
 }
+  // const checkDuplicateCourse=(tmpCourse:courseType)=>{
 
-
+  // }
   return (
-    
     <div className="App">
+      <Tutorials/>
       <Row>
         <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
-        <Col >
-          <h1>Course Pool</h1>
-          <h3>drag to semester table</h3>
-          {coursePool.map(course=><PoolOfCourse id={course.id} />)}
+        <Col className="PoolOfCourse">
+          <h1>Pool of Course</h1>
+          <h3>free to drag</h3>
+          {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
         </Col>
         <Col>
-          <Button className="btn btn-primary m-2" onClick={()=>addSemester() }>Add Semester</Button>
+          <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
+          <button className="btn btn-primary m-2" onClick={()=>addSemester() }>Add Semester</button>
 
-          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} 
-          checkPrerequisite={checkPrerequisite} defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
+          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite} 
+              defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
           
-          {AllUserCourses.map((semester, index)=> <SemesterBoard semester = {semester} semesterIndex = {index} 
-                                                semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
-                                                AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
+          {AllUserCourses.map((semester, index)=> 
+              <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
+                             semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
+                             AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
           }
         </Col>
       </Row>
-
     </div>
     
   );
