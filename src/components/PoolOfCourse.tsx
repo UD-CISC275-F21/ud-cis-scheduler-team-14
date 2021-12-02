@@ -1,10 +1,10 @@
-import React from 'react'
+// import React, { useState } from 'react'
 import { useDrag } from 'react-dnd';
 export interface poolOfCourse{
-    id: string
+    id:string
 }
 
-const PoolOfCourse = ({ id}:poolOfCourse) => {
+const PoolOfCourse = ({id }:poolOfCourse) => {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "string",
@@ -13,12 +13,15 @@ const PoolOfCourse = ({ id}:poolOfCourse) => {
           isDragging: !!monitor.isDragging(),
         }),
       }));
-    
+      
     return (
         <p ref = {drag}>
             {id}
+            {isDragging}
         </p>
+        
     )
+    
 }
 
 export default PoolOfCourse
