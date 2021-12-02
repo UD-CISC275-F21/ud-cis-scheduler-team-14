@@ -17,6 +17,7 @@
     "react-dnd": "^14.0.4",
     "react-dnd-html5-backend": "^14.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-scripts": "4.0.3",
     "ts-xlsx-export": "^1.0.1",
     "typescript": "^4.4.3",

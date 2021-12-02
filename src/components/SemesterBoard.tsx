@@ -1,57 +1,20 @@
 import { useState } from 'react'
 // import {semesterCourses} from '../interfaces/coursePool'
-import {Button,Table, Form, Col } from 'react-bootstrap'
+import {Table, CloseButton } from 'react-bootstrap'
 import EditCourseForm from './EditCourseForm'
-import {useDrop} from 'react-dnd'
+import { useDrop} from 'react-dnd'
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { AllUserCoursesType, courseType, semesterCoursesType } from '../interfaces/coursePool';
 
 interface semesterBoard{
     semester:{
         semesterName: string;
-        semesterCourses: {
-            id: string;
-            name: string;
-            description: string;
-            credit: number;
-            prerequisite: string[];
-            required: boolean;
-            elective: boolean;
-        }[];
-         //why I cannot use interface type
+        semesterCourses: semesterCoursesType;
     }
-    setAllUserCourses: React.Dispatch<React.SetStateAction<{
-        semesterName: string;
-        semesterCourses: {
-            id: string;
-            name: string;
-            description: string;
-            credit: number;
-            prerequisite: string[];
-            required: boolean;
-            elective: boolean;
-        }[];
-    }[]>>
+    setAllUserCourses: React.Dispatch<React.SetStateAction<AllUserCoursesType>>
     semesterIndex: number
-    AllUserCourses: {
-        semesterName: string;
-        semesterCourses: {
-            id: string;
-            name: string;
-            description: string;
-            credit: number;
-            prerequisite: string[];
-            required: boolean;
-            elective: boolean;
-        }[];
-    }[]
-    searchCourse: (id: string) => {
-        id: string;
-        name: string;
-        description: string;
-        credit: number;
-        prerequisite: string[];
-        required: boolean;
-        elective: boolean;
-    }
+    AllUserCourses: AllUserCoursesType
+    searchCourse: (id: string) => courseType
     semesterPool: string[]
     setSemesterPool: React.Dispatch<React.SetStateAction<string[]>>
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
@@ -65,7 +28,6 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
         let tmpAllUserCourses = AllUserCourses //remove item in AllUserCourses 
         tmpAllUserCourses= [...AllUserCourses.filter(item=>item!==semester)]
         setAllUserCourses(tmpAllUserCourses)
-
         let tmpSemesterPool = semesterPool //remove item in  semesterPool
         tmpSemesterPool = [...semesterPool.filter(semester=>semester!==semesterPool[semesterIndex])]
         setSemesterPool(tmpSemesterPool)
@@ -81,10 +43,9 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
         let tmpAllUserCourses = AllUserCourses
         tmpAllUserCourses[semesterIndex].semesterCourses = [...AllUserCourses[semesterIndex].semesterCourses.filter(course=>course.id!==id)]
         setAllUserCourses(tmpAllUserCourses);
-
     }
 
-    const editCourseForm=(tmpCourse:any)=>{
+    const editCourseForm=(tmpCourse:courseType)=>{
         let curIndex = 0;
         const curCourses = JSON.parse(JSON.stringify(semester.semesterCourses));
         semester.semesterCourses.forEach((course,index) => {
@@ -112,16 +73,15 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "string",
-        drop: (item:any) => dropCourse(item.id),
+        drop: (item:courseType) => dropCourse(item.id),
         collect: (monitor) => ({
           isOver: !!monitor.isOver(),
         }),
       }));
-    
       const dropCourse = (id:string) => {
         let tmpNotSatisfiedCourses:string[] = [];
         let tmpCourse = searchCourse(id)
-        tmpCourse.prerequisite.map(pre=>{
+        tmpCourse.prerequisite.forEach(pre=>{
             if(checkPrerequisite(pre,semesterIndex)===false) tmpNotSatisfiedCourses.push(pre)
         })
        if(tmpNotSatisfiedCourses.length===0){
@@ -132,17 +92,18 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
           alert("add success")
         } else{
             // console.log("dropCourse function tmpNotSatisfiedCourses: "+tmpNotSatisfiedCourses.map(item=>item))
-            alert("add failed, code more, add course info prompt ")
+            alert("add failed, not satisfied courses existed ")
         }
+        
       };
 
     return (
-        <Col>
-            <h1>{semester.semesterName}
-                <button className='btn btn-warning m-2' onClick={()=>deleteSemester()}>X</button>
-                <button className='btn btn-primary m-2' onClick={()=>clearCourses()}>clear courses</button>
-            </h1>
-            <Table striped bordered hover ref = {drop}>
+        <div>
+            <h3>
+                {semester.semesterName}
+                <CloseButton  onClick={()=>deleteSemester()}/>
+            </h3>
+            <Table striped bordered hover size="sm" responsive>
                 <thead className="thead-dark" >
                         <tr>
                             <th scope="col">id</th>
@@ -151,32 +112,34 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                             <th scope="col">Credit</th> 
                         </tr>
                     </thead>
-                {semester.semesterCourses.map(course=> 
-                    <tr >
-                        <th scope="row">{course.id}</th>
-                        <td>{course.name}</td>
-                        <td>{course.description}</td>
-                        <td>{course.credit}</td>
-                        <Button className="btn btn-primary m-2" onClick={()=>showEditForm(course.id)}>Edit</Button>
-                        <Button className="btn btn-primary m-2"  onClick={()=>deleteCourse(course.id)}>Delete</Button>
-                    </tr>
-                    )}
-                <tr>
-                total credits: {countCredit()}
-                </tr>
+                <tbody>
+                    {semester.semesterCourses.map((course,index)=> { return (
+                <tr ref = {drop} key={index}>
+                    <th scope="row">{course.id}</th>
+                    <td>{course.name}</td>
+                    <td>{course.description}</td>
+                    <td>{course.credit}</td>
+                    <div>                    
+                        <FaEdit  fontSize="30px" onClick={()=>showEditForm(course.id)}>Edit</FaEdit>
+                        <FaTrash fontSize="25px" onClick={()=>deleteCourse(course.id)}>Delete</FaTrash>
+                    </div>
+                    {isOver}
+                </tr> )} 
+                 )}                 
+                </tbody>
+                Total Credits: {countCredit()}
+                <button className='btn btn-danger m-2' onClick={()=>clearCourses()}>Clear Courses</button>
+
             </Table>   
             {showEditDiagram? 
              <div className='outer-diagram'>
                  <div className='diagram'>
-                   <EditCourseForm  editTmpId={editTmpId}  editCourseForm={editCourseForm} />
-                   <button className='diagram-cancel btn btn-primary' onClick={()=>setShowEditDiagram(false)}>cancel</button>
+                   <EditCourseForm  editTmpId={editTmpId}  editCourseForm={editCourseForm} setShowEditDiagram={setShowEditDiagram} searchCourse={searchCourse}/>
                  </div>
              </div> :
              <div></div>
              }
-        </Col>
-        
+        </div>
     )
-
 }
 export default SemesterBoard
