@@ -1,27 +1,21 @@
 import React, { useState } from 'react'
+import { courseType } from '../interfaces/coursePool'
 import EditDbCourseForm from './EditDbCourseForm'
 export interface courseInfoForm{
-    tmpCourse: {
-        id: string;
-        name: string;
-        description: string;
-        credit: number;
-        prerequisite: string[];
-        required: boolean;
-        elective: boolean;
-    } 
+    tmpCourse: courseType
     showAddFail: boolean
     notSatisfiedCourses: string[]
-    addCourse: (course: any) => void
-
+    addCourse: (course: courseType) => void
+    editDbCourse: (tmpCourse: courseType) => void
+    searchCourse: (id: string) => courseType
 }
 
-const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse }:courseInfoForm) => {
+const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse, editDbCourse, searchCourse }:courseInfoForm) => {
     const [showEdit, setShowEdit] = useState(false)
 
-    const editCourseInDb=()=>{
+    // const editCourseInDb=()=>{
 
-    }
+    // }
     return (
         <div>
             <p>id: {tmpCourse.id}</p>
@@ -30,19 +24,20 @@ const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse 
             <p>credit: {tmpCourse.credit}</p>
             {tmpCourse.required ? <p>{tmpCourse.id} is a required class</p>:<p></p>}
             {tmpCourse.elective ? <p>{tmpCourse.id} is an elective class</p>:<p></p>}
-            {showAddFail ? notSatisfiedCourses.map(course=><p>notSatisiedCourses: {course} is not satisifed as prerequisite in all previous semesters</p>):
-              <button className="btn btn-primary m-3" onClick={()=>addCourse(tmpCourse)}>Save Course</button>
-            }
+            {showAddFail ? notSatisfiedCourses.map(course=><p>notSatisiedCourses: {course} is not satisifed as prerequisite in all previous semesters</p>):<p></p>}
+            <button className="btn btn-success m-3" onClick={()=>addCourse(tmpCourse)}>Save Course</button>   
+            
             <button className="btn btn-primary m-3" onClick={()=>setShowEdit(true)}>Edit Course Info</button>
+            
             {showEdit ?
                 <div className='outer-diagram'>
                     <div className='diagram'>
-                    <EditDbCourseForm   />
+                    <EditDbCourseForm  editDbCourse={editDbCourse} searchCourse ={searchCourse} />
                     <button className='diagram-cancel btn btn-primary' onClick={()=>setShowEdit(false)}>cancel</button>
                     </div>
                 </div> :
                 <div></div>
-                }
+            }
         
     </div>
     )
