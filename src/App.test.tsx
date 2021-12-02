@@ -1,13 +1,13 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import App, {  defaultSemester } from './App';
+import App from './App'; //, {  defaultSemester }
 import Tutorials from './components/Tutorials';
 import Header from './components/Header';
 import AddCourseForm from './components/AddCourseForm';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DegreeRequirementForm from './components/DegreeRequirementForm';
-import SemesterBoard from './components/SemesterBoard';
+// import SemesterBoard from './components/SemesterBoard';
 import {defaultOb} from './interfaces/coursePool'
 
 describe("Tutorials",()=>{
