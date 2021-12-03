@@ -18,14 +18,14 @@ describe("Tutorials",()=>{
 const mockedOnAdd= jest.fn()
 describe("AddCourseForm",  ()=>{
     test('input element placeholder',()=>{
-        render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]} 
+        render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]}
             searchCourse={jest.fn()} checkPrerequisite={jest.fn()} defaultOb={defaultOb}
             editDbCourse={jest.fn()}/>);
         const InputBoxElement = screen.getByPlaceholderText(/Ex. CISC106/i)
         expect(InputBoxElement).toBeInTheDocument();
     })
     test('input element value change',()=>{
-        render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]} 
+        render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]}
             searchCourse={jest.fn()} checkPrerequisite={jest.fn()} defaultOb={defaultOb}
             editDbCourse={jest.fn()}/>);
         const InputElement = screen.getByPlaceholderText(/Ex. CISC106/i) as  HTMLInputElement
@@ -33,12 +33,12 @@ describe("AddCourseForm",  ()=>{
         expect(InputElement.value).toBe("cisc106")
     })
     test('input element not empty after search button is clicked',()=>{
-        render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]} 
+        render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]}
             searchCourse={jest.fn()} checkPrerequisite={jest.fn()} defaultOb={defaultOb}
             editDbCourse={jest.fn()}/>);
         const buttonElement = screen.getByRole("button", {name:/Search Course/i})
         const InputElement = screen.getByPlaceholderText(/Ex. CISC106/i) as  HTMLInputElement
-        fireEvent.change(InputElement, {target:{value:"cisc106"}}) 
+        fireEvent.change(InputElement, {target:{value:"cisc106"}})
         fireEvent.click(buttonElement)
         expect(InputElement.value).not.toBe("")
     })
