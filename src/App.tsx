@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import {Col, Row } from 'react-bootstrap';
+import {Col } from 'react-bootstrap'; //Row
 import SemesterBoard from './components/SemesterBoard';
 import COURSEPOOLJSON from './assets/coursePool.json'
 import AddCourseForm from './components/AddCourseForm';
