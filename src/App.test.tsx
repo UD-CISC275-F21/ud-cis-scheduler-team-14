@@ -19,7 +19,6 @@ describe("Tutorials",()=>{
       });
 })
 const mockedOnAdd= jest.fn()
-
 describe("AddCourseForm",  ()=>{
     test('input element placeholder',()=>{
         render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]} 
@@ -52,7 +51,6 @@ const MockApp= ()=>{
         <App/>
     </DndProvider>
     )}
-
 describe("Add Semester button ",()=>{
     test('should render new semester table',()=>{
         render(<MockApp/>)
