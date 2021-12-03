@@ -46,12 +46,12 @@ describe("AddCourseForm",  ()=>{
         expect(InputElement.value).not.toBe("")
     })
 })
-const MockApp= ()=>{
+const MockApp=()=>{
     return (<DndProvider backend = {HTML5Backend}>
         <App/>
     </DndProvider>
     )}
-describe("Add Semester button ",()=>{
+describe("Add Semester button",()=>{
     test('should render new semester table',()=>{
         render(<MockApp/>)
         const buttonElement = screen.getByRole("button", {name:/Add Semester/i})
