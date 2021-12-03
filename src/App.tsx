@@ -119,24 +119,26 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Row>
         <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
-        <Col className="PoolOfCourse">
-          <h1>Pool of Course</h1>
-          <h3>free to drag</h3>
-          {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
-        </Col>
-        <Col>
-          <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
-          <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
+          <Col>
+            <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
+          </Col>
+          <Col>
+            <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
 
-          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
-              defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
+            <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
+                defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
 
-          {AllUserCourses.map((semester, index)=>
-              <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
-                             semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
-                             AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
-          }
-        </Col>
+            {AllUserCourses.map((semester, index)=>
+                <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
+                              semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
+                              AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
+            }
+          </Col>
+          <Col className="PoolOfCourse">
+            <h1>Pool of Course</h1>
+            <h3>free to drag</h3>
+            {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
+          </Col>
         </Row>
       </DndProvider>
     </div>
