@@ -121,20 +121,18 @@ function App() {
         <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
           <Col>
             <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
-          </Col>
-          <Col>
-            <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
-
             <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
                 defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
-
+          </Col>
+          <Col>
+          <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
             {AllUserCourses.map((semester, index)=>
                 <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
                               semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
                               AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
             }
           </Col>
-          <Col className="PoolOfCourse">
+          <Col className="Col">
             <h1>Pool of Course</h1>
             <h3>free to drag</h3>
             {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
