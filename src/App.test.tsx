@@ -1,9 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import App from './App';
 import Tutorials from './components/Tutorials';
 import AddCourseForm from './components/AddCourseForm';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import {defaultOb} from './interfaces/coursePool'
 
 describe("Tutorials",()=>{
