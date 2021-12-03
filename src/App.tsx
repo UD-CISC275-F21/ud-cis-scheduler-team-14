@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import {Col } from 'react-bootstrap'; //Row
+import {Col, Row } from 'react-bootstrap'; //Row
 import SemesterBoard from './components/SemesterBoard';
 import COURSEPOOLJSON from './assets/coursePool.json'
 import AddCourseForm from './components/AddCourseForm';
@@ -42,7 +42,7 @@ const getLocalStorageSemester=()=>{
     console.log("tmpSemesterPool: "+tmpSemesterPool)
     return tmpSemesterPool
   }
-} 
+}
 
 
 function App() {
@@ -57,15 +57,15 @@ function App() {
     setSemesterPool(tmpSemesterPool)
 
   }
-  const addCourse = (course:courseType,semesterIndex:number) => { 
-      
+  const addCourse = (course:courseType,semesterIndex:number) => {
+
         let tmpAllUserCourses = AllUserCourses;
         tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,course]
         setAllUserCourses(tmpAllUserCourses)
         alert("add success")
-      
+
   }
-  
+
   const searchCourse=(id:string)=>{
     let tmpAllUserCourses = coursePool;
     let uppercase = id.toUpperCase();
@@ -86,7 +86,7 @@ function App() {
 
   const exportAsExcelFile =()=>{
     tsXLXS().exportAsExcelFile(AllUserCourses).saveAsExcelFile('FourYearPlan')
-  } //extension auto applie , not working 
+  } //extension auto applie , not working
 
   const checkPrerequisite=(requiredCourseId:string, semesterIndex:number)=>{
     let tmpPreviousCourses= AllUserCourses
@@ -99,7 +99,7 @@ function App() {
         isSatisfy = true
         return isSatisfy
     }))
-    return isSatisfy    
+    return isSatisfy
   }
   const editDbCourse=(tmpCourse:courseType)=>{
     let tmpCoursePool = coursePool;
@@ -117,6 +117,7 @@ function App() {
     <div className="App">
       <Tutorials/>
       <DndProvider backend={HTML5Backend}>
+        <Row>
         <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
         <Col className="PoolOfCourse">
           <h1>Pool of Course</h1>
@@ -127,18 +128,18 @@ function App() {
           <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
           <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
 
-          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite} 
+          <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
               defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
-          
-          {AllUserCourses.map((semester, index)=> 
+
+          {AllUserCourses.map((semester, index)=>
               <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
                              semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
                              AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
           }
         </Col>
+        </Row>
       </DndProvider>
     </div>
-    
   );
 }
 
