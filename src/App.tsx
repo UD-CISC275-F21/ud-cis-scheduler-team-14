@@ -10,6 +10,8 @@ import PoolOfCourse from './components/PoolOfCourse';
 import DegreeRequirementForm from './components/DegreeRequirementForm';
 import Tutorials from './components/Tutorials';
 import { AllUserCoursesType, courseType, defaultOb} from './interfaces/coursePool';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
 const coursePool = COURSEPOOLJSON
@@ -114,7 +116,7 @@ function App() {
   return (
     <div className="App">
       <Tutorials/>
-      <Row>
+      <DndProvider backend={HTML5Backend}>
         <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
         <Col className="PoolOfCourse">
           <h1>Pool of Course</h1>
@@ -134,7 +136,7 @@ function App() {
                              AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
           }
         </Col>
-      </Row>
+      </DndProvider>
     </div>
     
   );

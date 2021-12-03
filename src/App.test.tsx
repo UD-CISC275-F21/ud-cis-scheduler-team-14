@@ -1,8 +1,9 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import App from './App'; //, {  defaultSemester }
+import App from './App'; 
+//, {  defaultSemester }
 import Tutorials from './components/Tutorials';
-import Header from './components/Header';
+// import Header from './components/Header';
 import AddCourseForm from './components/AddCourseForm';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
