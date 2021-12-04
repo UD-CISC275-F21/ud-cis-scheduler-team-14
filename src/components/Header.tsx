@@ -2,19 +2,23 @@ import React from 'react'
 export interface Headers{
     save: ()=>void
     exportAsExcelFile: () => void
+    setShowTutorial: React.Dispatch<React.SetStateAction<Boolean>>
 }
 
-const Header = ({save, exportAsExcelFile}: Headers) => {
+const Header = ({save, exportAsExcelFile,setShowTutorial}: Headers) => {
     return (
         <nav>
-            <header className="navbar navbar-light bg-light">CS Major Four Year Plan 
-            {/* - High Performance Computing Concentration */}
-            <button className="btn btn-primary" onClick = {save}>Save to Local</button>
+            <header className="navbar navbar-light bg-light">
+                <h3>CS Major Four Year Plan</h3>
+                {/* - High Performance Computing Concentration */}
+                <button className="btn btn-primary" onClick = {save}>Save to Local</button>
 
-      <button className = "btn btn-primary" onClick = {exportAsExcelFile}>export as XLSX</button>
+                <button className = "btn btn-primary" onClick = {exportAsExcelFile}>export as XLSX</button>
+                <button className = "btn btn-primary" onClick = {()=>setShowTutorial(true)}>Tutorials</button>
+
             </header>
         </nav>
     )
 }
-    
+
 export default Header

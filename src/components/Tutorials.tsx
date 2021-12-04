@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { Modal } from 'react-bootstrap'
+export interface tutorials{
+  showTutorial: Boolean
+  setShowTutorial: React.Dispatch<React.SetStateAction<Boolean>>
+}
+const Tutorials = ({showTutorial,setShowTutorial}:tutorials) => {
 
-const Tutorials = () => {
-    const [show, setShow] = useState(true);
-
-    const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
-  
     return (
       <>
-        <Modal show={show} onHide={handleClose} size="lg" centered>
+        <Modal show={showTutorial} onHide={()=>setShowTutorial(false)} size="lg" centered>
           <Modal.Header closeButton>
             <Modal.Title>Tutorials</Modal.Title>
           </Modal.Header>
@@ -20,7 +18,7 @@ const Tutorials = () => {
             <p><strong>Save to Local</strong>: store current plan to local storage for later use </p>
             <p><strong>Export as XLSX</strong>: export existing plan to local xlsx file</p>
             <p><strong>Pool of Course</strong>: drag and drop course to any semester table</p>
-            <p><strong>Degree Requirement</strong>: list all required action for degree plan, includes credits requirement, 
+            <p><strong>Degree Requirement</strong>: list all required action for degree plan, includes credits requirement,
                 and number of elective courses requirement </p>
             <p><strong>Add semester</strong>: add a new empty semester table below</p>
             <p><strong>Course Action Box</strong><br></br>

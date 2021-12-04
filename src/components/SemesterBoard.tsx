@@ -18,14 +18,15 @@ interface semesterBoard{
     semesterPool: string[]
     setSemesterPool: React.Dispatch<React.SetStateAction<string[]>>
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
+    checkDuplicate: (courseId: string, semesterIndex: number) => boolean
 }
 
-const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite}:semesterBoard):JSX.Element => {
+const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite,checkDuplicate}:semesterBoard):JSX.Element => {
     const [showEditDiagram, setShowEditDiagram] = useState(false);
     const [editTmpId,setEditTmpId] = useState<string>("not found");
 
-    const deleteSemester=()=>{ 
-        let tmpAllUserCourses = AllUserCourses //remove item in AllUserCourses 
+    const deleteSemester=()=>{
+        let tmpAllUserCourses = AllUserCourses //remove item in AllUserCourses
         tmpAllUserCourses= [...AllUserCourses.filter(item=>item!==semester)]
         setAllUserCourses(tmpAllUserCourses)
         let tmpSemesterPool = semesterPool //remove item in  semesterPool
@@ -39,7 +40,7 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
         setAllUserCourses(tmpAllUserCourses)
     }
 
-    const deleteCourse = (id:string) => { 
+    const deleteCourse = (id:string) => {
         let tmpAllUserCourses = AllUserCourses
         tmpAllUserCourses[semesterIndex].semesterCourses = [...AllUserCourses[semesterIndex].semesterCourses.filter(course=>course.id!==id)]
         setAllUserCourses(tmpAllUserCourses);
@@ -85,16 +86,20 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
             if(checkPrerequisite(pre,semesterIndex)===false) tmpNotSatisfiedCourses.push(pre)
         })
        if(tmpNotSatisfiedCourses.length===0){
+           if(checkDuplicate(id,semesterIndex)){
           let tmpNewCourse = searchCourse(id);
           let tmpAllUserCourses = AllUserCourses;
           tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,tmpNewCourse]
           setAllUserCourses(tmpAllUserCourses)
           alert("add success")
+           }else{
+            alert("add failed. "+id+" is already in the semester")
+           }
         } else{
             // console.log("dropCourse function tmpNotSatisfiedCourses: "+tmpNotSatisfiedCourses.map(item=>item))
             alert("add failed, not satisfied courses existed ")
         }
-        
+
       };
 
     return (
@@ -109,7 +114,7 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                             <th scope="col">id</th>
                             <th scope="col">name</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Credit</th> 
+                            <th scope="col">Credit</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -119,19 +124,19 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                     <td>{course.name}</td>
                     <td>{course.description}</td>
                     <td>{course.credit}</td>
-                    <div>                    
+                    <div>
                         <FaEdit  fontSize="30px" onClick={()=>showEditForm(course.id)}>Edit</FaEdit>
                         <FaTrash fontSize="25px" onClick={()=>deleteCourse(course.id)}>Delete</FaTrash>
                     </div>
                     {isOver}
-                </tr> )} 
-                 )}                 
+                </tr> )}
+                 )}
                 </tbody>
                 Total Credits: {countCredit()}
                 <button className='btn btn-danger m-2' onClick={()=>clearCourses()}>Clear Courses</button>
 
-            </Table>   
-            {showEditDiagram? 
+            </Table>
+            {showEditDiagram?
              <div className='outer-diagram'>
                  <div className='diagram'>
                    <EditCourseForm  editTmpId={editTmpId}  editCourseForm={editCourseForm} setShowEditDiagram={setShowEditDiagram} searchCourse={searchCourse}/>

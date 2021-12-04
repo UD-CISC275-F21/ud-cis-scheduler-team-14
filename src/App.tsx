@@ -48,6 +48,7 @@ const getLocalStorageSemester=()=>{
 function App() {
   const [AllUserCourses, setAllUserCourses] = useState<AllUserCoursesType>(getLocalStorageCourses())
   const [semesterPool, setSemesterPool] = useState<string[]>(getLocalStorageSemester())
+  const [showTutorial, setShowTutorial] = useState<Boolean>(true)
 
   const addSemester=()=>{
     let newSemesterName = semesterPool.length+1
@@ -101,6 +102,21 @@ function App() {
     }))
     return isSatisfy
   }
+  const checkDuplicate=(courseId:string, semesterIndex:number)=>{
+    let tmpCurrentSemesterCourses:courseType[] = []
+    AllUserCourses.forEach((semester, index)=>{
+      if(index === semesterIndex){
+        tmpCurrentSemesterCourses = semester.semesterCourses
+      }
+    })
+    tmpCurrentSemesterCourses.forEach(course=>{
+      if(course.id === courseId){
+        return true;
+      }
+    })
+    return false;
+  }
+
   const editDbCourse=(tmpCourse:courseType)=>{
     let tmpCoursePool = coursePool;
     let curIndex = 0;
@@ -115,21 +131,22 @@ function App() {
   // }
   return (
     <div className="App">
-      <Tutorials/>
+      <Tutorials showTutorial = {showTutorial}setShowTutorial={setShowTutorial} />
       <DndProvider backend={HTML5Backend}>
         <Row>
-        <Header save = {save} exportAsExcelFile={exportAsExcelFile}/>
+        <Header save = {save} exportAsExcelFile={exportAsExcelFile} setShowTutorial={setShowTutorial}/>
           <Col>
             <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
             <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
-                defaultOb={defaultOb} editDbCourse= {editDbCourse}/>
+                defaultOb={defaultOb} editDbCourse= {editDbCourse} checkDuplicate={checkDuplicate}/>
           </Col>
           <Col>
           <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
             {AllUserCourses.map((semester, index)=>
                 <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
                               semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
-                              AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}/>)
+                              AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}
+                              checkDuplicate = {checkDuplicate}/>)
             }
           </Col>
           <Col className="Col">

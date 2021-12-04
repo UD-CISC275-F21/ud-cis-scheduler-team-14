@@ -25,20 +25,19 @@ const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse,
             {tmpCourse.required ? <p>{tmpCourse.id} is a required class</p>:<p></p>}
             {tmpCourse.elective ? <p>{tmpCourse.id} is an elective class</p>:<p></p>}
             {showAddFail ? notSatisfiedCourses.map(course=><p>notSatisiedCourses: {course} is not satisifed as prerequisite in all previous semesters</p>):<p></p>}
-            <button className="btn btn-success m-3" onClick={()=>addCourse(tmpCourse)}>Save Course</button>   
-            
+            <button className="btn btn-success m-3" onClick={()=>addCourse(tmpCourse)}>Save Course</button>
+
             <button className="btn btn-primary m-3" onClick={()=>setShowEdit(true)}>Edit Course Info</button>
-            
+
             {showEdit ?
                 <div className='outer-diagram'>
                     <div className='diagram'>
-                    <EditDbCourseForm  editDbCourse={editDbCourse} searchCourse ={searchCourse} />
-                    <button className='diagram-cancel btn btn-primary' onClick={()=>setShowEdit(false)}>cancel</button>
+                    <EditDbCourseForm  editDbCourse={editDbCourse} searchCourse ={searchCourse}setShowEdit={setShowEdit} editId={tmpCourse.id}/>
                     </div>
                 </div> :
                 <div></div>
             }
-        
+
     </div>
     )
 }
