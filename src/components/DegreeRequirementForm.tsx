@@ -31,8 +31,8 @@ const DegreeRequirementForm = ({AllUserCourses}:degreeRequirementForm) => {
     return (
         <div className="form-control">
             <h2>Degree Requirement</h2>
-            <Alert variant={degreeCreditCount()===120?'success':'warning'}>Credits:  {degreeCreditCount()} / 120</Alert>
-            <Alert variant={requiredCoursesCount()===120?'success':'warning'}>Required Classes: The degree must have ?? required classes  {requiredCoursesCount()} / ?? </Alert>
+            <Alert variant={degreeCreditCount()>=120?'success':'warning'}>Credits:  {degreeCreditCount()} / 120</Alert>
+            <Alert variant={requiredCoursesCount()>=2?'success':'warning'}>Required Classes: The degree must have ?? required classes  {requiredCoursesCount()} / ?? </Alert>
             <Alert variant={electiveCoursesCount()===3?'success':'warning'}>Electives: The degree must have at least 3 technical electives  {electiveCoursesCount()} / 3 </Alert>
 
         </div>

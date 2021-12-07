@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Toast } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { courseType } from '../interfaces/coursePool'
 import CourseInfoForm from './CourseInfoForm'
 
@@ -21,7 +21,6 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
     const [tmpCourse, setTmpCourse] = useState<courseType>(defaultOb)
     const [notSatisfiedCourses, setNotSatisfiedCourses] = useState<string[]>([])
     const [showAddFail, setshowAddFail] = useState(false)
-
 
     const onSubmit =(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
@@ -64,16 +63,19 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
     const addCourse=(course:courseType)=>{
         //do the add
         if(!notSatisfiedCourses.length){
-            if(checkDuplicate(course.id,semesterIndex)){
+            if(checkDuplicate(course.id,semesterIndex)===false){
          onAdd(course,semesterIndex)
+        // alert("add failed. "+course.id+" is already in the semester")
+
             }else{
+                // onAdd(course,semesterIndex)
                 alert("add failed. "+course.id+" is already in the semester")
             }
         }else{
             alert("add failed, not satisfied courses exist")
         }
 
-        //set value inside this class to orgin
+        // set value inside this class to orgin
         setTmpCourse(defaultOb);
         setId('');
         setShowAdd(!showAdd)
@@ -105,18 +107,10 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
 
                 </Form.Group>
             </Form>
-
             {showAdd &&
             <CourseInfoForm tmpCourse={tmpCourse} showAddFail={showAddFail} notSatisfiedCourses={notSatisfiedCourses} addCourse={addCourse}
             editDbCourse= {editDbCourse} searchCourse = {searchCourse}/>
                     }
-            <Toast>    {/* add in the right top corner */}
-                <Toast.Header>
-                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                    <strong className="me-auto">Bootstrap</strong>
-                </Toast.Header>
-                <Toast.Body>Course {id} add failed</Toast.Body>
-            </Toast>
 
         </div>
     )

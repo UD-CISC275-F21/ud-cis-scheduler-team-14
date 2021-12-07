@@ -1,9 +1,12 @@
+// import { useState } from 'react';
 import { Modal } from 'react-bootstrap'
+// import ReactJoyride from "react-joyride";
 export interface tutorials{
   showTutorial: Boolean
   setShowTutorial: React.Dispatch<React.SetStateAction<Boolean>>
 }
 const Tutorials = ({showTutorial,setShowTutorial}:tutorials) => {
+
 
     return (
       <>
@@ -37,6 +40,7 @@ const Tutorials = ({showTutorial,setShowTutorial}:tutorials) => {
 
           </Modal.Footer>
         </Modal>
+
       </>
     )
 }

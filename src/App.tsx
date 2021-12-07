@@ -12,6 +12,7 @@ import Tutorials from './components/Tutorials';
 import { AllUserCoursesType, courseType, defaultOb} from './interfaces/coursePool';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+// import cloneDeep from 'lodash/cloneDeep';
 
 
 const coursePool = COURSEPOOLJSON
@@ -23,6 +24,7 @@ export const defaultSemester = [
 export const defaultSemesterPool = [defaultSemester[0].semesterName,defaultSemester[1].semesterName]
 
 export const getLocalStorageCourses = ()=>{
+  console.log("hello")
   let defaultCourses : string| null= localStorage.getItem((LOCAL_STRORAGE_COURSES)) //need if statement because 'null' problem
   if(defaultCourses===null){
     return [...defaultSemester]
@@ -30,7 +32,7 @@ export const getLocalStorageCourses = ()=>{
     return JSON.parse(defaultCourses)
   }
 }
-const getLocalStorageSemester=()=>{
+export const getLocalStorageSemester=()=>{
   let tmpSemesterPool:string[] = []
   let defaultCourses : string| null= localStorage.getItem((LOCAL_STRORAGE_COURSES)) //need if statement because 'null' problem
   if(defaultCourses===null){
@@ -82,6 +84,7 @@ function App() {
     return defaultOb;
   }
   const save=()=>{
+    console.log("save")
     localStorage.setItem(LOCAL_STRORAGE_COURSES,JSON.stringify(AllUserCourses))
   }
 
@@ -93,8 +96,6 @@ function App() {
     let tmpPreviousCourses= AllUserCourses
     let isSatisfy = false;
     tmpPreviousCourses=AllUserCourses.filter((item, index)=> index<semesterIndex)
-    // console.log("tmpPreviousCourses: "+tmpPreviousCourses.map(item=>item.semesterCourses.map(item=>item.id))+
-    // "semesterIndex: "+semesterIndex)
     tmpPreviousCourses.map(course=>course.semesterCourses.map((item, index)=>{
       if(item.id === requiredCourseId)
         isSatisfy = true
@@ -102,18 +103,23 @@ function App() {
     }))
     return isSatisfy
   }
+
   const checkDuplicate=(courseId:string, semesterIndex:number)=>{
     let tmpCurrentSemesterCourses:courseType[] = []
     AllUserCourses.forEach((semester, index)=>{
       if(index === semesterIndex){
         tmpCurrentSemesterCourses = semester.semesterCourses
+        console.log("index: "+index)
       }
     })
     tmpCurrentSemesterCourses.forEach(course=>{
+      console.log("course id " +course.id)
       if(course.id === courseId){
+        console.log("return true here")
         return true;
       }
     })
+    console.log("return false here")
     return false;
   }
 
@@ -125,10 +131,13 @@ function App() {
     tmpCoursePool[curIndex] = tmpCourse;
     // setCoursePool(tmpCoursePool)
     //not finished
-}
-  // const checkDuplicateCourse=(tmpCourse:courseType)=>{
+  }
+  const clearCourses = (semesterIndex:number)=>{
+    let tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses))
+    tmpAllUserCourses[semesterIndex].semesterCourses = []
+    setAllUserCourses(tmpAllUserCourses)
+  }
 
-  // }
   return (
     <div className="App">
       <Tutorials showTutorial = {showTutorial}setShowTutorial={setShowTutorial} />
@@ -140,16 +149,18 @@ function App() {
             <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
                 defaultOb={defaultOb} editDbCourse= {editDbCourse} checkDuplicate={checkDuplicate}/>
           </Col>
-          <Col>
+          <Col xs={7}>
           <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
+          <div style={{display:'grid', gridTemplateColumns:'50% 50%'}}>
             {AllUserCourses.map((semester, index)=>
                 <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
                               semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
                               AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}
-                              checkDuplicate = {checkDuplicate}/>)
+                              checkDuplicate = {checkDuplicate} clearCourses = {clearCourses}/>)
             }
+            </div>
           </Col>
-          <Col className="Col">
+          <Col className="Col"  xs={2}>
             <h1>Pool of Course</h1>
             <h3>free to drag</h3>
             {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
