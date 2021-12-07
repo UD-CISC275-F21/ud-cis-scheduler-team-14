@@ -6,3 +6,7 @@
   background-color: white;
   max-width: 100px;
 }
+
+.semester-icon:hover {
+  border: black solid 1px;
+}
