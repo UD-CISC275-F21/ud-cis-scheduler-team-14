@@ -109,7 +109,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
             </Form>
             {showAdd &&
             <CourseInfoForm tmpCourse={tmpCourse} showAddFail={showAddFail} notSatisfiedCourses={notSatisfiedCourses} addCourse={addCourse}
-            editDbCourse= {editDbCourse} searchCourse = {searchCourse}/>
+            editDbCourse= {editDbCourse} searchCourse = {searchCourse} setShowAdd={setShowAdd}/>
                     }
 
         </div>

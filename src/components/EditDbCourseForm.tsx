@@ -6,9 +6,10 @@ interface editDbCourseForm{
     searchCourse: (id: string) => courseType
     setShowEdit: React.Dispatch<React.SetStateAction<boolean>>
     editId:string
+    setShowAdd: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId}:editDbCourseForm) => {
+const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShowAdd}:editDbCourseForm) => {
     const [name,setName] = useState('')
     const [description, setDescription] = useState("")
     const [credit, setCredit] = useState<number>(0)
@@ -23,6 +24,8 @@ const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId}:editDbC
         setPrerequisite(tmpCourse.prerequisite)
         editDbCourse({name, description, credit, id, required, elective, prerequisite})
         setPrerequisite([])
+        setShowAdd(false)
+        console.log(id+name)
 
     }
     return (
@@ -32,20 +35,20 @@ const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId}:editDbC
             </Modal.Header>
             <Modal.Body >
                 <Form onSubmit={onSubmitDb}>
-                    <Form.Label>course id</Form.Label>
+                    <Form.Label>Course Id</Form.Label>
                         <p><input type='text' placeholder='edit Course id' value={id} onChange={(e)=>setId(e.target.value)}/></p>
-                    <Form.Label>course name</Form.Label>
+                    <Form.Label>Course Name</Form.Label>
                         <p><input type='text' placeholder='edit Course name' value={name} onChange={(e)=>setName(e.target.value)}/></p>
-                    <Form.Label>description</Form.Label>
+                    <Form.Label>Description</Form.Label>
                         <p><input type='text' placeholder='edit description' value={description} onChange={(e)=>setDescription(e.target.value)}/></p>
-                    <Form.Label>credit</Form.Label>
+                    <Form.Label>Credit</Form.Label>
                         <p><input type='number' placeholder='edit credit'value={credit}  onChange={(e)=>setCredit(parseInt(e.target.value))}/></p>
-                    <Form.Label>course Required: </Form.Label>
+                    <Form.Label>Course Required: </Form.Label>
                         <p>
                             <input type='radio'  value="true" name="required" onChange={(e)=>setRequired(true)}/>yes
                             <input type='radio'  value="false" name="required" onChange={(e)=>setRequired(false)}/>no
                         </p>
-                    <Form.Label>course Elective: </Form.Label>
+                    <Form.Label>Course Elective: </Form.Label>
                         <p>
                             <input type='radio'  value="true" name="elective" onChange={(e)=>setElective(true)}/>yes
                             <input type='radio'  value="false" name="elective" onChange={(e)=>setRequired(false)}/>no
