@@ -24,7 +24,6 @@ export const defaultSemester = [
 export const defaultSemesterPool = [defaultSemester[0].semesterName,defaultSemester[1].semesterName]
 
 export const getLocalStorageCourses = ()=>{
-  console.log("hello")
   let defaultCourses : string| null= localStorage.getItem((LOCAL_STRORAGE_COURSES)) //need if statement because 'null' problem
   if(defaultCourses===null){
     return [...defaultSemester]
@@ -48,6 +47,7 @@ export const getLocalStorageSemester=()=>{
 
 
 function App() {
+  const [coursePool, setCoursePool] = useState<courseType[]>(COURSEPOOLJSON)
   const [AllUserCourses, setAllUserCourses] = useState<AllUserCoursesType>(getLocalStorageCourses())
   const [semesterPool, setSemesterPool] = useState<string[]>(getLocalStorageSemester())
   const [showTutorial, setShowTutorial] = useState<Boolean>(true)
@@ -62,7 +62,7 @@ function App() {
   }
   const addCourse = (course:courseType,semesterIndex:number) => {
 
-        let tmpAllUserCourses = AllUserCourses;
+        let tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses))
         tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,course]
         setAllUserCourses(tmpAllUserCourses)
         alert("add success")
@@ -70,17 +70,17 @@ function App() {
   }
 
   const searchCourse=(id:string)=>{
-    let tmpAllUserCourses = coursePool;
+    let TmpCoursePool = coursePool;
     let uppercase = id.toUpperCase();
     let curIndex = 0;
     let exist = false;
-    tmpAllUserCourses.forEach((value,index) => {
+    TmpCoursePool.forEach((value,index) => {
       if (value.id===uppercase) {
         curIndex = index;
         exist = true;
       }
     })
-    if (exist){ return tmpAllUserCourses[curIndex]};
+    if (exist){ return TmpCoursePool[curIndex]};
     return defaultOb;
   }
   const save=()=>{
@@ -123,19 +123,17 @@ function App() {
     return false;
   }
 
-  const editDbCourse=(tmpCourse:courseType)=>{
-    let tmpCoursePool = coursePool;
+  const editDbCourse=(tmpCourse:courseType, editId:string)=>{
+    let tmpCoursePool:courseType[] = JSON.parse(JSON.stringify(coursePool))
     let curIndex = 0;
-    tmpCoursePool.forEach((course,index)=>{if (course.id === tmpCourse.id) curIndex = index;
+    tmpCoursePool.forEach((course,index)=>{
+      if (course.id === editId) curIndex = index;
     })
+
+    console.log("curIndex "+ curIndex)
     tmpCoursePool[curIndex] = tmpCourse;
-    // setCoursePool(tmpCoursePool)
-    //not finished
-  }
-  const clearCourses = (semesterIndex:number)=>{
-    let tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses))
-    tmpAllUserCourses[semesterIndex].semesterCourses = []
-    setAllUserCourses(tmpAllUserCourses)
+    setCoursePool(tmpCoursePool)
+
   }
 
   return (
@@ -156,7 +154,7 @@ function App() {
                 <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
                               semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
                               AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}
-                              checkDuplicate = {checkDuplicate} clearCourses = {clearCourses}/>)
+                              checkDuplicate = {checkDuplicate} />)
             }
             </div>
           </Col>

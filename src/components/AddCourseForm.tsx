@@ -9,7 +9,7 @@ interface addCourseForm{
     searchCourse: (id: string) => courseType
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
     defaultOb:  courseType
-    editDbCourse: (tmpCourse: courseType) => void
+    editDbCourse: (tmpCourse: courseType, editId:string) => void
     checkDuplicate: (courseId: string, semesterIndex: number) => boolean
 }
 
@@ -109,7 +109,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
             </Form>
             {showAdd &&
             <CourseInfoForm tmpCourse={tmpCourse} showAddFail={showAddFail} notSatisfiedCourses={notSatisfiedCourses} addCourse={addCourse}
-            editDbCourse= {editDbCourse} searchCourse = {searchCourse}/>
+            editDbCourse= {editDbCourse} searchCourse = {searchCourse} setShowAdd={setShowAdd}/>
                     }
 
         </div>

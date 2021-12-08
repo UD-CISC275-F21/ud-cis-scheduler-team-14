@@ -1,6 +1,6 @@
 import { useState } from 'react'
 // import {semesterCourses} from '../interfaces/coursePool'
-import {Table, CloseButton } from 'react-bootstrap'
+import {Table, Modal, Form } from 'react-bootstrap'
 import EditCourseForm from './EditCourseForm'
 import { useDrop} from 'react-dnd'
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -19,13 +19,13 @@ interface semesterBoard{
     setSemesterPool: React.Dispatch<React.SetStateAction<string[]>>
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
     checkDuplicate: (courseId: string, semesterIndex: number) => boolean
-    clearCourses: (semesterIndex: number) => void
 }
 
-const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite,checkDuplicate,clearCourses}:semesterBoard):JSX.Element => {
+const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite,checkDuplicate}:semesterBoard):JSX.Element => {
     const [showEditDiagram, setShowEditDiagram] = useState(false);
     const [editTmpId,setEditTmpId] = useState<string>("not found");
-    // const [tmpSemester, setTmpSemester] = useState(semester.semesterCourses);
+    const [showEditSemesterName, setShowEditSemesterName] = useState(false)
+    const [editSemesterName, setEditSemesterName] = useState('')
 
     const deleteSemester=()=>{
         let tmpAllUserCourses = AllUserCourses //remove item in AllUserCourses
@@ -36,27 +36,15 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
         tmpSemesterPool = [...semesterPool.filter(semester=>semester!==semesterPool[semesterIndex])]
         setSemesterPool(tmpSemesterPool)
     }
-    // const clearCourse = (semesterIndex:number)=>{
-    //     let tmpAllUserCourses = AllUserCourses
-    //     tmpAllUserCourses[semesterIndex].semesterCourses = []
-    //     setAllUserCourses(tmpAllUserCourses)
-    //     console.log(tmpAllUserCourses)
-    //   }
-
-    // const clearC = (semesterIndex:number) => {
-    //     let tmpAllUserCourses = AllUserCourses
-    //     tmpAllUserCourses[semesterIndex].semesterCourses = []
-    //     clearCourses(tmpAllUserCourses)
-    // }
-
-
+    const clearCourses = (semesterIndex:number)=>{
+        let tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses))
+        tmpAllUserCourses[semesterIndex].semesterCourses = []
+        setAllUserCourses(tmpAllUserCourses)
+      }
 
     const deleteCourse = (id:string) => {
-        let tmpAllUserCourses = AllUserCourses
+        let tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses))
         tmpAllUserCourses[semesterIndex].semesterCourses = [...AllUserCourses[semesterIndex].semesterCourses.filter(course=>course.id!==id)]
-        // let tmpSemesterCourse = tmpSemester;
-        // tmpSemesterCourse = tmpSemesterCourse.filter(course=>course.id!==id)
-        // setTmpSemester(tmpSemesterCourse);
         setAllUserCourses(tmpAllUserCourses);
     }
 
@@ -112,14 +100,29 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
             // console.log("dropCourse function tmpNotSatisfiedCourses: "+tmpNotSatisfiedCourses.map(item=>item))
             alert("add failed, not satisfied courses existed ")
         }
-
       };
+
+      const onEditSemesterName=(e:React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        let tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses))
+        tmpAllUserCourses[semesterIndex].semesterName = editSemesterName
+        setAllUserCourses(tmpAllUserCourses)
+
+        let tmpSemesterPool = JSON.parse(JSON.stringify(semesterPool))
+        tmpSemesterPool[semesterIndex] = editSemesterName
+        setSemesterPool(tmpSemesterPool)
+        setShowEditSemesterName(false)
+
+      }
 
     return (
         <div>
             <h3>
                 {semester.semesterName}
-                <CloseButton  onClick={()=>deleteSemester()}/>
+                <FaEdit className='semester-icon' fontSize="30px" onClick={()=>setShowEditSemesterName(true)}> Edit</FaEdit>
+                {/* <CloseButton  onClick={()=>deleteSemester()}/> */}
+                <FaTrash className='semester-icon' fontSize="25px"  onClick={()=>deleteSemester()}>Delete</FaTrash>
+
             </h3>
             <Table striped bordered hover size="sm" responsive>
                 <thead className="thead-dark" >
@@ -157,7 +160,20 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
              </div> :
              <div></div>
              }
+             {showEditSemesterName &&
+             <Modal show={()=>setShowEditSemesterName(true)} onHide={()=>setShowEditSemesterName(false)} size="lg" centered>
+             <Modal.Header closeButton>
+               <Modal.Title>Edit Semester Name: {semester.semesterName}</Modal.Title>
+             </Modal.Header>
+             <Modal.Body >
+                <Form onSubmit={onEditSemesterName} >
+                     <p> <input type='text' placeholder='Edit Semester Name' value={editSemesterName} onChange={(e)=>setEditSemesterName(e.target.value)} /></p>
+                     <p><input type="submit" className="btn btn-success m-2" value="Save Change"/></p>
+                </Form>
+        </Modal.Body>
+        </Modal>}
         </div>
+
     )
 }
 export default SemesterBoard

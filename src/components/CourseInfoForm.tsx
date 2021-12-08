@@ -6,16 +6,15 @@ export interface courseInfoForm{
     showAddFail: boolean
     notSatisfiedCourses: string[]
     addCourse: (course: courseType) => void
-    editDbCourse: (tmpCourse: courseType) => void
+    editDbCourse: (tmpCourse: courseType, editId:string) => void
     searchCourse: (id: string) => courseType
+    setShowAdd: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse, editDbCourse, searchCourse }:courseInfoForm) => {
+const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse, editDbCourse, searchCourse,setShowAdd }:courseInfoForm) => {
     const [showEdit, setShowEdit] = useState(false)
 
-    // const editCourseInDb=()=>{
 
-    // }
     return (
         <div>
             <p>id: {tmpCourse.id}</p>
@@ -32,7 +31,7 @@ const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse,
             {showEdit ?
                 <div className='outer-diagram'>
                     <div className='diagram'>
-                    <EditDbCourseForm  editDbCourse={editDbCourse} searchCourse ={searchCourse}setShowEdit={setShowEdit} editId={tmpCourse.id}/>
+                    <EditDbCourseForm  editDbCourse={editDbCourse} searchCourse ={searchCourse}setShowEdit={setShowEdit} editId={tmpCourse.id} setShowAdd={setShowAdd} />
                     </div>
                 </div> :
                 <div></div>
