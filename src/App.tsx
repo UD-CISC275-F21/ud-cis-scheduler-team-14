@@ -123,12 +123,13 @@ function App() {
     return false;
   }
 
-  const editDbCourse=(tmpCourse:courseType)=>{
-    let tmpCoursePool = coursePool;
+  const editDbCourse=(tmpCourse:courseType, editId:string)=>{
+    let tmpCoursePool:courseType[] = JSON.parse(JSON.stringify(coursePool))
     let curIndex = 0;
     tmpCoursePool.forEach((course,index)=>{
-      if (course.id == tmpCourse.id) curIndex = index;
+      if (course.id == editId) curIndex = index;
     })
+
     console.log("curIndex "+ curIndex)
     tmpCoursePool[curIndex] = tmpCourse;
     setCoursePool(tmpCoursePool)

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import { courseType } from '../interfaces/coursePool'
 interface editDbCourseForm{
-    editDbCourse: (tmpCourse: courseType) => void
+    editDbCourse: (tmpCourse: courseType, editId:string) => void
     searchCourse: (id: string) => courseType
     setShowEdit: React.Dispatch<React.SetStateAction<boolean>>
     editId:string
@@ -22,11 +22,9 @@ const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShow
         e.preventDefault();
         let tmpCourse = searchCourse(id)
         setPrerequisite(tmpCourse.prerequisite)
-        editDbCourse({name, description, credit, id, required, elective, prerequisite})
+        editDbCourse({name, description, credit, id, required, elective, prerequisite}, editId)
         setPrerequisite([])
         setShowAdd(false)
-        console.log(id+name)
-
     }
     return (
             <Modal show={()=>setShowEdit(true)} onHide={()=>setShowEdit(false)} size="lg" centered>

@@ -6,7 +6,7 @@ export interface courseInfoForm{
     showAddFail: boolean
     notSatisfiedCourses: string[]
     addCourse: (course: courseType) => void
-    editDbCourse: (tmpCourse: courseType) => void
+    editDbCourse: (tmpCourse: courseType, editId:string) => void
     searchCourse: (id: string) => courseType
     setShowAdd: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -14,9 +14,7 @@ export interface courseInfoForm{
 const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse, editDbCourse, searchCourse,setShowAdd }:courseInfoForm) => {
     const [showEdit, setShowEdit] = useState(false)
 
-    // const editCourseInDb=()=>{
 
-    // }
     return (
         <div>
             <p>id: {tmpCourse.id}</p>

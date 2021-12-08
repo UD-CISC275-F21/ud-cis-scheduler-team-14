@@ -9,7 +9,7 @@ interface addCourseForm{
     searchCourse: (id: string) => courseType
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
     defaultOb:  courseType
-    editDbCourse: (tmpCourse: courseType) => void
+    editDbCourse: (tmpCourse: courseType, editId:string) => void
     checkDuplicate: (courseId: string, semesterIndex: number) => boolean
 }
 
