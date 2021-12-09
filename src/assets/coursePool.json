@@ -617,9 +617,36 @@
         "elective":false
     },
     {
-        "id":"ARSC297",
-        "name":"test",
-        "description":"passport to art",
+        "id":"ANTH201",
+        "name":"Visualizing Humanity: Ethnographic Film",
+        "description":"Examines visual cultural representations, meanings and interpretations in the medium of ethnographic film. Introduces ethnographic filmmaking history and critical theory. Primarily encompasses regional subjects and cultural practices including those developed in Austronesia, Africa, North and South America, and South Asia.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH205",
+        "name":"Anthropology and Human Nature",
+        "description":"Archaeological, biological and cultural anthropology organized around the theme of human nature.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH216",
+        "name":"Introduction to Material Culture Studies",
+        "description":"Introduces students to material culture studies, broadly defined as study of all things people make and all the ways people have altered the physical world. Explores the approaches, concepts, and methods of numerous disciplines that investigate material culture.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH227",
+        "name":"American Culture",
+        "description":"Lecture Concepts and methods of cultural anthropology in contemporary America. The culture concept, American social structure, language, values and beliefs.",
         "credit":3,
         "prerequisite":[],
         "required":false,
@@ -627,9 +654,358 @@
     },
 
     {
+        "id":"ANTH239",
+        "name":"Arts and Crafts of Native North America",
+        "description":"Anthropological analysis of indigenous technologies, arts, and crafts ofnative peoples of North America, including textiles, stoneworking, andceramics.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH251",
+        "name":"Introduction to Ethnic Arts",
+        "description":"General survey of the ethnoarts from Africa, the Americas and the Pacific,including sculpture, painting, decoration and their interrelationships withoral literature, music, dance, games and ritual.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"ANTH338",
+        "name":"Arts and Crafts of Native South America",
+        "description":"Arts and crafts technological processes invented by or available to tribalsocieties of South America. Artistic and technical achievements in ceramicand textile.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
         "id":"ARSC297",
         "name":"test",
-        "description":"passport to art",
+        "description":"passport",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH344",
+        "name":"Anthropology of Clothing and Fashion",
+        "description":"This course takes clothing as a starting point for examining broad themes in anthropology, including gender and sexuality, race and the body, history and colonialism. We look at the ritual significance of clothing and other practices of bodily adornment in traditional societies and the role of style in constituting contemporary social movements and identity categories. We investigate the globalization of the fashion industry, from design and production to branding and marketing, in order to understand the relationships among citizenship, consumption, labor, and power in the global economy. The course encourages students to reflect on their relationship to the wider society and economy as producers and consumers of material culture through the lens of clothing.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH381",
+        "name":"Visions of Native Americans",
+        "description":"Critically examines the visual images of Native Americans that have been created in films, photography, commercial art and media and analyzes how those images function in Euroamerican culture.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ANTH457",
+        "name":"Survey of African Art",
+        "description":"Major African art styles, their interrelationships, the context of usage andthe meanings of African artworks.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"ART129",
+        "name":"Design for Non-Majors",
+        "description":"Introduction to art and design principles within creative problem solving assignments using 2-dimensional and 3-dimensional media. Design organization criteria, technical craftsmanship, and artistic objectives interconnect to support production of original expressive statements.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"ART133",
+        "name":"Drawing for Non-Majors",
+        "description":"Projects involving black-and-white and color studies in a variety of media, including charcoal, pencil, ink, and pastels.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"ART180",
+        "name":"Digital Photography for Non-Majors",
+        "description":"Introduces the basics of photography as a way to communicate ideas emphasizing content, composition, and technique. Examines contemporary artists and historic movements through research, gallery visits and lectures. Using a digital camera and visual editing software students create, edit and critique images.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART200",
+        "name":"Introduction to Art and Design for Games",
+        "description":"Students will learn game theory, animation, and design. Intended for students from across the university, no experience with making art or knowledge of computer programming is required. Students will work individually and in groups to design and develop working video games.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART204",
+        "name":"Media/Design/Culture",
+        "description":"Current and historical media processes and their impact on art, design and culture. Image making and manipulation, video, audio, interactivity, and connectivity. Viewing fine art and design projects, the historical aspects of design and digital media, basic media theory, and universal principles of software and digital media. Projects include writing, creating visual media, and making presentations. Unfamiliar media experienced firsthand through exhibitions, screenings, lectures, online exploration and consumer media devices.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART230",
+        "name":"Figure Drawing",
+        "description":"Drawing the human figure through direct observation. Emphasizes strong fundamental skills, experimentation and imagination. Working with an assortment of traditional mixed media, students explore line,value,color and perspective to interpret form and space while developing original content.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART231 ",
+        "name":"Introduction to Painting",
+        "description":"An exploration of beginning oil painting methods and material through both traditional and conceptual painting ideas, providing the student with a foundation for discovering their unique potential for self-expression.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART233",
+        "name":"Drawing as Study",
+        "description":"Develop both a technical and conceptual understanding of the methods behind the drawing process. Analyze the systems involved in transferring the three-dimensional world to a two-dimensional surface. Discussions about light and shadow, surface texture, perspective, and, in particular, linear structure, as well as the various ways these conditions reveal themselves visually. The prior concepts will be used as the foundation on which to build more advanced understanding of how drawing might be used to investigate the physical world, and what might differentiate it from other ways of recording. Repeatable for 6 credits.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART243 ",
+        "name":"Introduction to Printmaking",
+        "description":"Introduction to a variety of print techniques including digital, silkscreen, etching, and woodcut, and for developing multiple and one of a kind images.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART246",
+        "name":"Screenprinting",
+        "description":"Introduction to basic water-based screenprinting including drawing fluid, crayon resist, and photo emulsion techniques.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART250",
+        "name":"Introduction to Sculpture",
+        "description":"Introduction to a wide variety of construction techniques and tools to create sculpture working in metal and wood including welding and woodshop equipment.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART280",
+        "name":"Introduction to Photo and Video",
+        "description":"Introduction to digital photography, video, and sound art. Explore lens-based and time-based uses of the camera and computer. Investigate collaborative methodologies and critical study of media culture and relationships to digital technology in an image-saturated society.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART281",
+        "name":"Darkroom Photography",
+        "description":"Explores the concepts and tools of black & white photography while studying photographic movements such as conceptual photography, portraiture, landscape, social documentary, and the manipulated image. Includes analog camera, flash, and darkroom techniques.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART289",
+        "name":"Documentary Photography",
+        "description":"Introduces critical issues and practices in documentary photography and video. Explores the influence of social documentarians. Examines the relationship of word and image, the role of photo editors and the development of the photo-essay through discussion and studio experience.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ART290",
+        "name":"Introduction to Ceramics",
+        "description":"Introduction to the tools, processes and aesthetics of ceramics.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ARTC110 ",
+        "name":"Digital Heritage",
+        "description":"Bridge course for transitioning ELI students as well as an introductory course for “domestic students” to cultural heritage and specifically digital heritage. Introduction to global heritage preservation through digital platforms and team-based learning, with participation in three hands-on practical applications. Participants will create an individual academic portfolio, help build a digital exhibition using artifacts from the Morris Library Special Collections, and participate in the Space Archaeology program to help thwart looting of archaeological sites, using GlobalXplorer°.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GAME201",
+        "name":"Introduction to Game Studies",
+        "description":"Examine the major genres of videogames produced around the world, and major critical approaches taken by academics to the study of those games. Issues for discussion may include the dominance of console platforms in some markets and PC gaming in others; ethics and violence in games; representations of gender and race; processes of immersion and identification in different game types; and the effect of increasingly realistic environments and cinematics.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"GAME351",
+        "name":"Videogames and Japanese Culture",
+        "description":"Examines Japanese videogames from both a ludological and narratological perspective. Genres studies include the JRPG, stealth action, simulation and fighting games.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GAME352",
+        "name":"Videogames and Latin American Culture",
+        "description":"Explores the relationship between videogames and culture by analyzing both in-game cultural representation and the real-life economic, political and societal effects of games across Latin America.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GEOG203",
+        "name":"Introduction to Cultural Geography",
+        "description":"passpIntroductory study of people, landscapes and cultures through time. Emphasis is on culture, ethics and aesthetics as contexts for human perceptions and the creation of varied human habitats.ortart",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GEOG345",
+        "name":"Cultural Geography",
+        "description":"Broad principles of the field. Human mobility and stasis. Material and symbolic landscapes. Individual and group values in landscape formation and change.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GEOG346",
+        "name":"Urban Cultural Geography",
+        "description":"passportart",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GEOG416",
+        "name":"Climate Fiction, Science, and Communication",
+        "description":"How can fiction help us understand and apply science? In this interdisciplinary class, we’ll use climate fiction, climate change science, journalism reports, movies, and research on science communication to understand the role narratives can play in creating visions of the future and motivating us to take action. Students will learn to integrate across disciplines and explore how narratives in fiction and non-fiction writing shape public perceptions of scientific research.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GRMN211",
+        "name":"German Reading and Writing",
+        "description":"Reading and discussion of 20th-century German short stories and novellas. Several short compositions. Grammar review where appropriate.",
+        "credit":3,
+        "prerequisite":["GRMN107","GRMN106","GRMN105"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GREK301",
+        "name":"Ancient Prose: Advanced Intermediate Greek",
+        "description":"Focuses on the works (in the original language) of one or more prose authors with particular attention to interpretative issues such as themes and contemporary intellectual and cultural milieu. Readings drawn from the philosophical, historical, and oratorical works of authors such as Plato, Herodotus, Xenophon, Lysias, Demosthenes, and Isocrates in rotation or in combination.",
+        "credit":3,
+        "prerequisite":["GREK202","GREK201","GREK102","GREK101"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GRMN107",
+        "name":"German III - Intermediate",
+        "description":"Review of grammar, continued practice in speaking and writing, and reading texts of average difficulty.",
+        "credit":3,
+        "prerequisite":["GRMN106","GRMN105"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GRMN106",
+        "name":"GERMAN II - ELEMENTARY/INTERMEDIATE",
+        "description":"Completion of basic German. Increasing mastery of the basic skills of speaking, listening, reading and writing.",
+        "credit":3,
+        "prerequisite":["GRMN105"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GRMN105",
+        "name":"German I - Elementary",
+        "description":"Introduction to the German language and development of speaking, listening, reading and writing skills through the use of basic texts.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"GREK202",
+        "name":"Ancient Poetry: Intermediate Greek",
+        "description":"Focuses on the works of one or more poets. Readings will be drawn from the epic, lyric, and dramatic (tragic and comic) works of authors such as Homer, Sappho, Pindar, Aeschylus, Sophocles, Euripides, and Aristophanes in rotation or in combination.",
+        "credit":3,
+        "prerequisite":["GREK201","GREK102","GREK101"],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"GREK201",
+        "name":"ANCIENT PROSE: INTERMEDIATE GREEK",
+        "description":"Focuses on the works of one or more prose authors with particular attention to review of grammar and syntax. Readings will be drawn from the philosophical, historical, and oratorical works of authors such as Plato, Herodotus, Xenophon, Lysias, Demosthenes, and Isocrates in rotation or in combination.",
+        "credit":3,
+        "prerequisite":["GREK102","GREK101"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GREK102",
+        "name":"Elementary Ancient Greek II",
+        "description":"Completion of elementary Greek.",
+        "credit":3,
+        "prerequisite":["GREK101"],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"GREK 101",
+        "name":"ELEMENTARY ANCIENT GREEK I",
+        "description":"Prepares students to read ancient Greek literary works in the original language. Emphasizes building a basic vocabulary and acquiring essential grammar. Includes discussion of ancient Greek culture and civilization.",
         "credit":3,
         "prerequisite":[],
         "required":false,
