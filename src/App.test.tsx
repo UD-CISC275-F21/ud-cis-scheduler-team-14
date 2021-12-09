@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import React from "react";
 import Tutorials from "./components/Tutorials";
 import AddCourseForm from "./components/AddCourseForm";
 import {defaultOb} from "./interfaces/coursePool";
