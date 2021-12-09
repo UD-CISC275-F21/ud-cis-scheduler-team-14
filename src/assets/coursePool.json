@@ -121,7 +121,7 @@
         "description":"Explains relationships among information technology, society and ethics by examining issues raised by increasingly widespread use of computers. Topics include ethics for computer professionals, computer impact on factory work, office work, personal privacy and social power distribution.",
         "credit":3,
         "prerequisite":[],
-        "required":false,
+        "required":true,
         "elective":false
     },
     {
@@ -332,7 +332,7 @@
         "id":"CHEM133",
         "name":"General Chemistry Laboratory",
         "description":"Laboratory topics and techniques covered include: stoichiometry, gases, liquids, solids, atomic and molecular structure, chemical reactions in solution, and properties of solutions. 42h lab experiments.",
-        "credit":3,
+        "credit":1,
         "prerequisite":["CHEM103"],
         "required":true,
         "elective":false
@@ -341,7 +341,7 @@
         "id":"CHEM134",
         "name":"General Chemistry Laboratory",
         "description":"This laboratory course is the second in a two-semester sequence designed (and required) for science and engineering majors. Covers thermodynamics, kinetics, equilibrium among gases, liquids and solids, equilibrium in solution, acids and bases, electrochemistry, and nuclear chemistry.  Topics touched on briefly include transition elements and types and nomenclature of organic compounds. Descriptive chemistry of representative elements is interspersed throughout the course.  42h laboratory experiments.",
-        "credit":3,
+        "credit":1,
         "prerequisite":["CHEM103"],
         "required":true,
         "elective":false
@@ -386,8 +386,8 @@
         "id":"PHYS227",
         "name":"Fundamentals of Physics Laboratory I",
         "description":"Introductory laboratory experience associated with the course content in PHYS 207.  This includes exploring projectile motion, linear and rotational dynamics, energy, momentum, and simple harmonic motion.",
-        "credit":3,
-        "prerequisite":[],
+        "credit":1,
+        "prerequisite":["MATH241","PHYS207"],
         "required":true,
         "elective":false
     },
@@ -400,51 +400,232 @@
         "required":true,
         "elective":false
     },
+
     {
-        "id":"MATH243",
-        "name":"test",
-        "description":"Calculus C",
+        "id":"BISC207",
+        "name":"Introductory Biology I",
+        "description":"Molecular basis of life. Structure and function of cells, including signal transduction pathways. Energy transformations. Classical Mendelian genetics and the flow of information from DNA to RNA to proteins. Laboratory focuses on the testing of hypotheses, data analysis and scientific writing.",
+        "credit":4,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+
+    {
+        "id":"BISC208",
+        "name":"ntroductory Biology II",
+        "description":"Mechanisms of evolution. Physiology of multicellular plants and animals. Principles of ecology with emphasis on the biology of populations. Laboratory focuses on testing of hypotheses, data analysis and scientific writing. Animal and plant anatomy also studied.",
+        "credit":4,
+        "prerequisite":["BISC207"],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":"GEOL105",
+        "name":"Geological Hazards and Their Human Impact",
+        "description":"Geological processes and events that adversely affect humans and civilization. Methods for predicting and dealing with geological hazards. May be taken with a 1 credit lab, GEOL 115.",
         "credit":3,
-        "prerequisite":["MATH242"],
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":"GEOL107",
+        "name":"Geology of Dynamic Earth",
+        "description":"Principles of physical geology and its application in interpreting earth processes. Laboratory covers identification of earth materials and the interpretation of topographic and geologic maps.",
+        "credit":4,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":"GEOL115",
+        "name":"Geological Hazards Laboratory",
+        "description":"Laboratory investigation of environmental geological processes and their impact on society: earthquakes, volcanoes, coastal hazards, rivers and streams, groundwater. Identification of earth materials and study of earth processes using topographical, geological and tectonic maps.",
+        "credit":1,
+        "prerequisite":["GEOL105"],
+        "required":true,
+        "elective":false
+    },
+
+    {
+        "id":"GEOL107",
+        "name":"Geology of Dynamic Earth",
+        "description":"Principles of physical geology and its application in interpreting earth processes. Laboratory covers identification of earth materials and the interpretation of topographic and geologic maps.",
+        "credit":4,
+        "prerequisite":[],
+        "required":true,
+        "elective":false
+    },
+    {
+        "id":"GEOL110",
+        "name":"Earth's Evolving Systems",
+        "description":"History of the earth and its biota. Origins, evolution and mass extinctionsof major groups of organisms as demonstrated by the earth’s fossil record. Laboratory covers identification of basic fossil groups and exercises in interpreting Earth history.",
+        "credit":4,
+        "prerequisite":[],
         "required":true,
         "elective":false
     },
     {
         "id":"EGGG101",
-        "name":"test",
-        "description":"intro to engineering",
+        "name":"Introduction to Engineering",
+        "description":"Introduction to profession, including disciplines of chemical, civil, computer, electrical, environmental, and mechanical engineering. Prepares students for success through integration of: technical problem solving and engineering design, ethical decision-making, teamwork, and communicating to diverse audiences.",
         "credit":2,
         "prerequisite":[],
         "required":true,
         "elective":false
     },
     {
-        "id":"ENGL110",
-        "name":"test",
-        "description":"Seminar in composition",
-        "credit":3,
-        "prerequisite":[],
-        "required":true,
-        "elective":false
-    },
-    {
         "id":"BHAN120",
-        "name":"test",
-        "description":"physical education",
-        "credit":1,
+        "name":"Physical Education",
+        "description":"Introduces knowledge and skills in physical activity. The program is geared toward lifetime sports and allows for selection.",
+        "credit":3,
         "prerequisite":[],
         "required":false,
         "elective":false
     },
     {
         "id":"THEA241",
-        "name":"test",
-        "description":"a theater class",
+        "name":"Western Theatre: Live on Stage",
+        "description":"An historical view of theatre starting with the Greeks through late 20th century plays with examples performed live on stage by professional actors from UD's Resident Ensemble Players. An added value course with some classes taken out of the lecture hall and moved into the theatre.",
         "credit":3,
         "prerequisite":[],
         "required":false,
         "elective":false
     },
+    {
+        "id":"THEA104",
+        "name":"Introduction to Theatre and Drama",
+        "description":"Survey of the elements of theatre and drama. Includes attendance at theatrical productions, readings of representative plays, discussion of a method of dramatic analysis, explanation of staging in periods of major importance and discussion of the actor, the designer and the director.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA110",
+        "name":"Introduction to African American Studies",
+        "description":"Assesses the status of Black America in the modern technological order through an examination of the major spheres of institutional life, including employment, education politics, criminal justice and the military.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA193",
+        "name":"Special Topics: Re(de)constructing AfroLatinx Intersections",
+        "description":"This course takes a multidisciplinary approach to the study of peoples of African descent in Caribbean and Latin American context. This course begins with continental Africa from early times (concerning the TransAtlantic Slave Trade and continues to contemporary times. The course reviews the geography, history, social, political, and economic developments of peoples of African descent in the Caribbean and Latin America. It also reviews the evolution and implication of the Atlantic slave trade and the dispersal of peoples of African descent in the Caribbean and Latin American realm and the effects of enslavement involving cultural development.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA205",
+        "name":"Contemporary African American Issues",
+        "description":"The impact of important issues involving African American people in contemporary American society. Critical theoretical analyses of trends that affect programs of the Black community writ large.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"AFRA206",
+        "name":"Survey of African American Culture",
+        "description":"Historic and contemporary aspects of African American culture. A multi-faceted approach utilizing resources from music, literature, history, folklore, religion and sociology.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"AFRA220",
+        "name":"The Civil Rights Movement",
+        "description":"This course examines African American struggles for freedom, equality, and citizenship from the 1940s to the present.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA221 ",
+        "name":"Race and Sports in American Society",
+        "description":"Examines the salient issues in U.S. society such as racism, capitalism, sexism, violence, oppression, etc. by using the context of sport to explore the social and cultural experiences of African Americans from slavery to today. It allows students to see both the cultural agency of African Americans and the pervasiveness of racial oppression that exist in and out of sports world. Analyze the experience of race in U.S. sports in relationship to its historical, cultural, social, economic, and political dynamics. Identify, analyze, discuss and critique theories regarding race and ethnic relations in U.S. sports. Develop critical thinking and analytical skills by comparing and contrasting the experiences of African Americans with other groups.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+
+    {
+        "id":"AFRA222",
+        "name":"Racial Politics in Today's Sports",
+        "description":"Investigates the politics of race in the U. S. sports with particular attention to the political status of African Americans, and white prejudice and discrimination. Ask such questions as: Is there racism in sports? How can we tell if ads are racist, and whether sports team owners are using code words to appeal to racial prejudices? Is kneeling for the anthem to protest the treatment of Black Americans unpatriotic? Are race-conscious policies really necessary? Should Black athletes use sports to protest socio-political issues? Seek to answer these questions and more by studying the systemic forms of oppression and discussing various cultural perspectives in an atmosphere of intellectual rigor and mutual respect for opposing views. Develop your understanding race by using the context of sport to explore many salient issues in American society such as racism, blind patriotism, capitalism, sexism, violence, oppression, etc. Enhance your critical thinking skills, information literacy skills, and your ability to place historical and contemporary issues in proper context.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA223 ",
+        "name":"Sports, Media, and Culture",
+        "description":"This course examines the interrelationship of sports, media, and culture in today’s society and how that interrelationship sometimes reinforces or challenge social values. It draws on the cultural identification of class, race, and gender to identify sports values and cultural values. Drawing on theories of culture, rhetoric, and social criticism, we will examine media’s role in telling the story of sports and, in telling that story, shapes cultural values. Students will study several critical approaches to sports and public discourse and will apply those approaches to journalism, public relations, the news and popular media, and other forms of mass communication.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA225",
+        "name":"Black Male Experience",
+        "description":"Explores the complex and diverse experiences of African American males in contemporary U.S. society by examining the various factors impacting their lives such as family, education, prison, sports, relationships, etc. This allows a better understanding of the thoughts and practices of African American males as well as the impact they have on society as a whole. Include an intersectional lens of analysis that includes race, gender, sexuality, age, disability, and socio-economic class.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"AFRA250",
+        "name":"Afro Future Females",
+        "description":"This course focuses on visual, literary, and sonic representations of black womanhood of the 20th and 21st centuries in the context of black woman-authored speculative fiction and discourses of futurity. Through closely looking at and listening to visual, literary, and sonic texts by black women, we will consider social constructions of race, gender, and sexuality; the significance of self-fashioning; and notions of community and belonging.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"AFRA251",
+        "name":"Addressing Inequity (Social, Political, Economic, Educational)",
+        "description":"Through an interdisciplinary lens this course explores current social, political, educational and economic inequities facing the black community and critically assess their causes, effects, and possible solutions (i.e. disenfranchisement, the school-to-prison pipeline, mass incarceration, policing, and poverty).",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
+    {
+        "id":"AFRA304",
+        "name":"African American History to the Civil War",
+        "description":"The history of African American life and culture to the Civil War.",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+    {
+        "id":"ARSC297",
+        "name":"test",
+        "description":"passport to art",
+        "credit":3,
+        "prerequisite":[],
+        "required":false,
+        "elective":false
+    },
+
     {
         "id":"ARSC297",
         "name":"test",
