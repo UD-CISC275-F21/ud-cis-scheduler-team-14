@@ -41,9 +41,14 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
             }
         });
         if (exist) {
-            setSemesterIndex(curIndex);
-            setTmpCourse(tmpCourse);
-            setShowAdd(!showAdd);
+            if(showAdd){
+                setSemesterIndex(curIndex);
+                setTmpCourse(tmpCourse);
+            }else{
+                setSemesterIndex(curIndex);
+                setTmpCourse(tmpCourse);
+                setShowAdd(!showAdd);
+            }
         } else {
             alert("semester not found");
         }
