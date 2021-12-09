@@ -67,7 +67,7 @@ function App():JSX.Element {
     };
 
     const searchCourse=(id:string)=>{
-        const TmpCoursePool = coursePool;
+        const TmpCoursePool:courseType[] = JSON.parse(JSON.stringify(coursePool));
         const uppercase = id.toUpperCase();
         let curIndex = 0;
         let exist = false;
@@ -126,7 +126,7 @@ function App():JSX.Element {
         const tmpCoursePool:courseType[] = JSON.parse(JSON.stringify(coursePool));
         let curIndex = 0;
         tmpCoursePool.forEach((course,index)=>{
-            if (course.id === editId) curIndex = index;
+            if (course.id == editId) curIndex = index;
         });
 
         console.log("curIndex "+ curIndex);

@@ -128,7 +128,7 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">name</th>
-                        <th scope="col">Description</th>
+                        {/* <th scope="col">Description</th> */}
                         <th scope="col">Credit</th>
                     </tr>
                 </thead>
@@ -138,7 +138,7 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                             <tr ref = {drop} key={index}>
                                 <th scope="row">{course.id}</th>
                                 <td>{course.name}</td>
-                                <td>{course.description}</td>
+                                {/* <td>{course.description}</td> */}
                                 <td>{course.credit}</td>
                                 <div>
                                     <FaEdit className='semester-icon' fontSize="30px" onClick={()=>showEditForm(course.id)}>Edit</FaEdit>
