@@ -143,10 +143,13 @@ function App():JSX.Element {
                     <Header save = {save} exportAsExcelFile={exportAsExcelFile} setShowTutorial={setShowTutorial}/>
                     <Col>
                         <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
+                        <h1>Pool of Course</h1>
+                        <h3>free to drag</h3>
+                        {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
+                    </Col>
+                    <Col xs={8}>
                         <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
                             defaultOb={defaultOb} editDbCourse= {editDbCourse} checkDuplicate={checkDuplicate}/>
-                    </Col>
-                    <Col xs={7}>
                         <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
                         <div style={{display:"grid", gridTemplateColumns:"50% 50%"}}>
                             {AllUserCourses.map((semester, index)=>
@@ -157,11 +160,8 @@ function App():JSX.Element {
                             }
                         </div>
                     </Col>
-                    <Col className="Col"  xs={2}>
-                        <h1>Pool of Course</h1>
-                        <h3>free to drag</h3>
-                        {coursePool.map((course, index)=><PoolOfCourse id = {course.id} key={index}/>)}
-                    </Col>
+                    {/* <Col className="Col"  xs={2}>
+                    </Col> */}
                 </Row>
             </DndProvider>
         </div>
