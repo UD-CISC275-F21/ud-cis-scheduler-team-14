@@ -6,7 +6,7 @@ export const defaultOb = {
     "prerequisite":[],
     "required":false,
     "elective":false
-  }
+};
 export type courseType = {
     id:string
     name:string
@@ -16,10 +16,10 @@ export type courseType = {
     required:boolean
     elective:boolean
   }
-  export type semesterName = string
-  export type semesterCoursesType = courseType[]
-  export type semesterType = [semesterName,semesterCoursesType]
-  export type AllUserCoursesType = {
+export type semesterName = string
+export type semesterCoursesType = courseType[]
+export type semesterType = [semesterName,semesterCoursesType]
+export type AllUserCoursesType = {
     semesterName: string;
     semesterCourses: courseType[];
 }[]
