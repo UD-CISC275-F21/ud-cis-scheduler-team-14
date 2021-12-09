@@ -27,7 +27,7 @@ const Tutorials = ({showTutorial,setShowTutorial}:tutorials):JSX.Element => {
                     <p><strong>Add semester</strong>: add a new empty semester table below</p>
                     <p><strong>Course Action Box</strong><br></br>
                         <strong>Search Course</strong>: type in course id, then press &apossearch course&apos button<br></br>
-                        <h3><strong>Add Course</strong></h3><h4>: choose a desired semester--{">"}type in course id--{">"}click search course button--{">"}then in the pop-up window,click save course (needs to pass prerequisite check)</h4><br></br>
+                        <strong>Add Course</strong>: choose a desired semester--{">"}type in course id--{">"}click search course button--{">"}then in the pop-up window,click save course (needs to pass prerequisite check)<br></br>
                         <strong>Edit Course</strong>: after searching a course, press &aposedit course&apos button, then in the pop-up window, modify the data in the database<br></br>
                     </p>
                     <p><strong>Semester Board</strong> <br></br>
