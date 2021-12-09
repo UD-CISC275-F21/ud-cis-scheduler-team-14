@@ -18,7 +18,7 @@ const coursePool = COURSEPOOLJSON;
 export const LOCAL_STRORAGE_COURSES = "current-courses";
 export const defaultSemester = [
     {semesterName: "First Fall", semesterCourses:[coursePool[0]]},
-    {semesterName:"First Spring", semesterCourses:[coursePool[1],coursePool[2]]}
+    {semesterName:"First Spring", semesterCourses:[coursePool[2],coursePool[3]]}
 ];
 export const defaultSemesterPool = [defaultSemester[0].semesterName,defaultSemester[1].semesterName];
 
@@ -113,7 +113,7 @@ function App():JSX.Element {
         });
         tmpCurrentSemesterCourses.forEach(course=>{
             console.log("course id " +course.id);
-            if(course.id === courseId){
+            if(course.id === courseId){ //this line has issue
                 console.log("return true here");
                 return true;
             }

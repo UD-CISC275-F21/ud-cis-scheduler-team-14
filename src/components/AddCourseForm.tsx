@@ -67,7 +67,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
     const addCourse=(course:courseType)=>{
         //do the add
         if(!notSatisfiedCourses.length){
-            if(checkDuplicate(course.id,semesterIndex)===false){
+            if(!checkDuplicate(course.id,semesterIndex)){
                 onAdd(course,semesterIndex);
                 // alert("add failed. "+course.id+" is already in the semester")
 

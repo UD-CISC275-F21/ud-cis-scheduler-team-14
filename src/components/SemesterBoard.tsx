@@ -140,19 +140,19 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                                 <td>{course.name}</td>
                                 {/* <td>{course.description}</td> */}
                                 <td>{course.credit}</td>
-                                <div>
+                                <td>
                                     <FaEdit className='semester-icon' fontSize="30px" onClick={()=>showEditForm(course.id)}>Edit</FaEdit>
                                     <FaTrash className='semester-icon' fontSize="25px" onClick={()=>deleteCourse(course.id)}>Delete</FaTrash>
-                                </div>
+                                </td>
                                 {isOver}
                             </tr> );
                     }
                     )}
                 </tbody>
-                Total Credits: {countCredit()}
-                <button className='btn btn-danger m-2' onClick={()=>clearCourses(semesterIndex)}>Clear Courses</button>
-
             </Table>
+            Total Credits: {countCredit()}
+            <button className='btn btn-danger m-2' onClick={()=>clearCourses(semesterIndex)}>Clear Courses</button>
+
             {showEditDiagram?
                 <div className='outer-diagram'>
                     <div className='diagram'>
