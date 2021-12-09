@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 export interface Headers{
     save: ()=>void
     exportAsExcelFile: () => void
-    setShowTutorial: React.Dispatch<React.SetStateAction<Boolean>>
+    setShowTutorial: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Header = ({save, exportAsExcelFile,setShowTutorial}: Headers) => {
+const Header = ({save, exportAsExcelFile,setShowTutorial}: Headers):JSX.Element => {
     return (
         <nav>
             <header className="navbar navbar-light bg-light">
@@ -18,7 +18,7 @@ const Header = ({save, exportAsExcelFile,setShowTutorial}: Headers) => {
 
             </header>
         </nav>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
