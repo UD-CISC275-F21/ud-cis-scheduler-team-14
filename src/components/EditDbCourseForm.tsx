@@ -35,7 +35,7 @@ const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShow
             <Modal.Body >
                 <Form onSubmit={onSubmitDb}>
                     <Form.Label>Course Id</Form.Label>
-                    <p><input type='text' placeholder='letter MUST uppercase' value={id} onChange={(e)=>setId(e.target.value)}/></p>
+                    <p><input type='text' placeholder='Letter MUST Uppercase' value={id} onChange={(e)=>setId(e.target.value)}/></p>
                     <Form.Label>Course Name</Form.Label>
                     <p><input type='text' placeholder='edit Course name' value={name} onChange={(e)=>setName(e.target.value)}/></p>
                     <Form.Label>Description</Form.Label>
