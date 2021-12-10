@@ -6,13 +6,12 @@ export interface courseInfoForm{
     showAddFail: boolean
     notSatisfiedCourses: string[]
     addCourse: (course: courseType) => void
-    editDbCourse: (tmpCourse: courseType, editId:string) => void
-    searchCourse: (id: string,coursePool: courseType[]) => courseType
     setShowAdd: React.Dispatch<React.SetStateAction<boolean>>
     coursePool: courseType[]
+    setCoursePool: React.Dispatch<React.SetStateAction<courseType[]>>
 }
 
-const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse, editDbCourse, searchCourse,setShowAdd,coursePool }:courseInfoForm):JSX.Element => {
+const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse,setShowAdd,coursePool,setCoursePool }:courseInfoForm):JSX.Element => {
     const [showEdit, setShowEdit] = useState(false);
 
 
@@ -32,8 +31,8 @@ const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse,
             {showEdit ?
                 <div className='outer-diagram'>
                     <div className='diagram'>
-                        <EditDbCourseForm  editDbCourse={editDbCourse} searchCourse ={searchCourse}setShowEdit={setShowEdit}
-                            editId={tmpCourse.id} setShowAdd={setShowAdd} coursePool={coursePool}/>
+                        <EditDbCourseForm  setShowEdit={setShowEdit}
+                            editId={tmpCourse.id} setShowAdd={setShowAdd} coursePool={coursePool} setCoursePool={setCoursePool}/>
                     </div>
                 </div> :
                 <div></div>

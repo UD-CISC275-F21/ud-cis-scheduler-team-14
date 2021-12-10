@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { AllUserCoursesType, courseType } from "../interfaces/coursePool";
+import { checkDuplicate, checkPrerequisite, searchCourse } from "../utilities/data";
 import CourseInfoForm from "./CourseInfoForm";
+
 
 interface addCourseForm{
     onAdd:  (course: courseType, semesterIndex: number, AllUserCourses: AllUserCoursesType, setAllUserCourses: (value: React.SetStateAction<AllUserCoursesType>) => void) => void
     semesterPool:string[]
-    searchCourse: (id: string, coursePool: courseType[]) => courseType
-    checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
     defaultOb:  courseType
-    editDbCourse: (tmpCourse: courseType, editId:string) => void
-    checkDuplicate: (courseId: string, semesterIndex: number) => boolean
     AllUserCourses: AllUserCoursesType
     setAllUserCourses: (value: React.SetStateAction<AllUserCoursesType>) => void
     coursePool: courseType[]
+    setCoursePool: React.Dispatch<React.SetStateAction<courseType[]>>
 }
 
-const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, defaultOb, editDbCourse,checkDuplicate,AllUserCourses,setAllUserCourses,coursePool}:addCourseForm):JSX.Element => {
+const AddCourseForm = ({onAdd, semesterPool, defaultOb,AllUserCourses,setAllUserCourses,coursePool,setCoursePool}:addCourseForm):JSX.Element => {
     const [showAdd, setShowAdd] = useState(false);
     const [id,setId] = useState("");
     const [semester,setSemester] = useState("");
@@ -59,7 +58,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
         //check prerequisite
         const tmpNotSatisfiedCourses:string[] = []; //is it right way to declare new Array
         tmpCourse.prerequisite.forEach(pre=>{
-            if(checkPrerequisite(pre,semesterIndex)===false) tmpNotSatisfiedCourses.push(pre);
+            if(checkPrerequisite(pre,semesterIndex,AllUserCourses)===false) tmpNotSatisfiedCourses.push(pre);
         });
         setNotSatisfiedCourses(tmpNotSatisfiedCourses);
         if(notSatisfiedCourses.length){
@@ -70,12 +69,9 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
     const addCourse=(course:courseType)=>{
         //do the add
         if(!notSatisfiedCourses.length){
-            if(!checkDuplicate(course.id,semesterIndex)){
+            if(!checkDuplicate(course.id,semesterIndex,AllUserCourses)){
                 onAdd(course,semesterIndex,AllUserCourses,setAllUserCourses);
-                // alert("add failed. "+course.id+" is already in the semester")
-
             }else{
-                // onAdd(course,semesterIndex)
                 alert("add failed. "+course.id+" is already in the semester");
             }
         }else{
@@ -116,7 +112,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
             </Form>
             {showAdd &&
             <CourseInfoForm tmpCourse={tmpCourse} showAddFail={showAddFail} notSatisfiedCourses={notSatisfiedCourses} addCourse={addCourse}
-                editDbCourse= {editDbCourse} searchCourse = {searchCourse} setShowAdd={setShowAdd} coursePool={coursePool}/>
+                setShowAdd={setShowAdd} coursePool={coursePool} setCoursePool = {setCoursePool}/>
             }
 
         </div>
