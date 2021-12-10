@@ -2,11 +2,11 @@
 import COURSEPOOLJSON from "../assets/coursePool.json";
 import { AllUserCoursesType, courseType, defaultOb} from "../interfaces/coursePool";
 
-const coursePool = COURSEPOOLJSON;
+const CoursePool = COURSEPOOLJSON;
 export const LOCAL_STRORAGE_COURSES = "current-courses";
 export const defaultSemester = [
-    {semesterName: "First Fall", semesterCourses:[coursePool[0]]},
-    {semesterName:"First Spring", semesterCourses:[coursePool[2],coursePool[3]]}
+    {semesterName: "First Fall", semesterCourses:[CoursePool[0]]},
+    {semesterName:"First Spring", semesterCourses:[CoursePool[2],CoursePool[3]]}
 ];
 export const defaultSemesterPool = [defaultSemester[0].semesterName,defaultSemester[1].semesterName];
 
@@ -62,3 +62,44 @@ export const searchCourse=(id:string,coursePool: courseType[]):courseType=>{
     return defaultOb;
 };
 
+export const save=(AllUserCourses:AllUserCoursesType):void=>{
+    localStorage.setItem(LOCAL_STRORAGE_COURSES,JSON.stringify(AllUserCourses));
+};
+
+export const editDbCourse=(tmpCourse:courseType, editId:string, coursePool:courseType[],setCoursePool: React.Dispatch<React.SetStateAction<courseType[]>> ):void=>{
+    const tmpCoursePool:courseType[] = JSON.parse(JSON.stringify(coursePool));
+    let curIndex = 0;
+    tmpCoursePool.forEach((course,index)=>{
+        if (course.id == editId) curIndex = index;
+    });
+    tmpCoursePool[curIndex] = tmpCourse;
+    setCoursePool(tmpCoursePool);
+};
+
+export const checkPrerequisite=(requiredCourseId:string, semesterIndex:number,AllUserCourses:AllUserCoursesType):boolean=>{
+    let tmpPreviousCourses:AllUserCoursesType= JSON.parse(JSON.stringify(AllUserCourses));
+    let isSatisfy = false;
+    tmpPreviousCourses=AllUserCourses.filter((item, index)=> index<semesterIndex);
+    tmpPreviousCourses.map(course=>course.semesterCourses.map((item)=>{
+        if(item.id === requiredCourseId)
+            isSatisfy = true;
+        return isSatisfy;
+    }));
+    return isSatisfy;
+};
+
+export const checkDuplicate=(courseId:string, semesterIndex:number,AllUserCourses:AllUserCoursesType):boolean=>{ //not working
+    let isDuplicate = false;
+    let tmpCurrentSemesterCourses:courseType[] = [];
+    AllUserCourses.forEach((semester, index)=>{
+        if(index === semesterIndex){
+            tmpCurrentSemesterCourses = semester.semesterCourses;
+        }
+    });
+    tmpCurrentSemesterCourses.forEach(course=>{
+        if(course.id === courseId){
+            isDuplicate = true;
+        }
+    });
+    return isDuplicate;
+};

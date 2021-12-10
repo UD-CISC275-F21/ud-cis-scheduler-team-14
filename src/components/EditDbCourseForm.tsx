@@ -2,16 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { courseType } from "../interfaces/coursePool";
+import { editDbCourse, searchCourse }from "../utilities/data";
 interface editDbCourseForm{
-    editDbCourse: (tmpCourse: courseType, editId:string) => void
-    searchCourse: (id: string,coursePool: courseType[]) => courseType
     setShowEdit: React.Dispatch<React.SetStateAction<boolean>>
     editId:string
     setShowAdd: React.Dispatch<React.SetStateAction<boolean>>
     coursePool: courseType[]
+    setCoursePool: React.Dispatch<React.SetStateAction<courseType[]>>
+
 }
 
-const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShowAdd,coursePool}:editDbCourseForm):JSX.Element => {
+const EditDbCourseForm = ({setShowEdit,editId, setShowAdd,coursePool,setCoursePool}:editDbCourseForm):JSX.Element => {
     const [name,setName] = useState("");
     const [description, setDescription] = useState("");
     const [credit, setCredit] = useState<number>(0);
@@ -24,7 +25,7 @@ const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShow
         e.preventDefault();
         const tmpCourse = searchCourse(id,coursePool);
         setPrerequisite(tmpCourse.prerequisite);
-        editDbCourse({name, description, credit, id, required, elective, prerequisite}, editId);
+        editDbCourse({name, description, credit, id, required, elective, prerequisite}, editId,coursePool,setCoursePool);
         setPrerequisite([]);
         setShowAdd(false);
     };

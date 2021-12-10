@@ -4,6 +4,7 @@ import EditCourseForm from "./EditCourseForm";
 import { useDrop} from "react-dnd";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { AllUserCoursesType, courseType, semesterCoursesType } from "../interfaces/coursePool";
+import { checkDuplicate, checkPrerequisite, searchCourse } from "../utilities/data";
 
 interface semesterBoard{
     semester:{
@@ -13,15 +14,12 @@ interface semesterBoard{
     setAllUserCourses: React.Dispatch<React.SetStateAction<AllUserCoursesType>>
     semesterIndex: number
     AllUserCourses: AllUserCoursesType
-    searchCourse: (id: string, coursePool: courseType[]) => courseType
     semesterPool: string[]
     setSemesterPool: React.Dispatch<React.SetStateAction<string[]>>
-    checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
-    checkDuplicate: (courseId: string, semesterIndex: number) => boolean
     coursePool: courseType[]
 }
 
-const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite,coursePool}:semesterBoard):JSX.Element => {
+const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, semesterPool, setSemesterPool,coursePool}:semesterBoard):JSX.Element => {
     const [showEditDiagram, setShowEditDiagram] = useState(false);
     const [editTmpId,setEditTmpId] = useState<string>("not found");
     const [showEditSemesterName, setShowEditSemesterName] = useState(false);
@@ -84,18 +82,18 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
         const tmpNotSatisfiedCourses:string[] = [];
         const tmpCourse = searchCourse(id,coursePool);
         tmpCourse.prerequisite.forEach(pre=>{
-            if(checkPrerequisite(pre,semesterIndex)===false) tmpNotSatisfiedCourses.push(pre);
+            if(checkPrerequisite(pre,semesterIndex,AllUserCourses)===false) tmpNotSatisfiedCourses.push(pre);
         });
         if(tmpNotSatisfiedCourses.length===0){
-        //    if(checkDuplicate(id,semesterIndex)){
-            const tmpNewCourse = searchCourse(id,coursePool);
-            const tmpAllUserCourses = AllUserCourses;
-            tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,tmpNewCourse];
-            setAllUserCourses(tmpAllUserCourses);
-            alert("add success");
-        //    }else{
-        //     alert("add failed. "+id+" is already in the semester")
-        //    }
+            if(!checkDuplicate(id,semesterIndex,AllUserCourses)){
+                const tmpNewCourse = searchCourse(id,coursePool);
+                const tmpAllUserCourses = AllUserCourses;
+                tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,tmpNewCourse];
+                setAllUserCourses(tmpAllUserCourses);
+                alert("add success");
+            }else{
+                alert("add failed. "+id+" is already in the semester");
+            }
         } else{
             // console.log("dropCourse function tmpNotSatisfiedCourses: "+tmpNotSatisfiedCourses.map(item=>item))
             alert("add failed, not satisfied courses existed ");
