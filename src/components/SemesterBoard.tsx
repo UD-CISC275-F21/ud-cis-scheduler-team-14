@@ -13,14 +13,15 @@ interface semesterBoard{
     setAllUserCourses: React.Dispatch<React.SetStateAction<AllUserCoursesType>>
     semesterIndex: number
     AllUserCourses: AllUserCoursesType
-    searchCourse: (id: string) => courseType
+    searchCourse: (id: string, coursePool: courseType[]) => courseType
     semesterPool: string[]
     setSemesterPool: React.Dispatch<React.SetStateAction<string[]>>
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
     checkDuplicate: (courseId: string, semesterIndex: number) => boolean
+    coursePool: courseType[]
 }
 
-const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite}:semesterBoard):JSX.Element => {
+const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex, searchCourse, semesterPool, setSemesterPool,checkPrerequisite,coursePool}:semesterBoard):JSX.Element => {
     const [showEditDiagram, setShowEditDiagram] = useState(false);
     const [editTmpId,setEditTmpId] = useState<string>("not found");
     const [showEditSemesterName, setShowEditSemesterName] = useState(false);
@@ -81,13 +82,13 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
     }));
     const dropCourse = (id:string) => {
         const tmpNotSatisfiedCourses:string[] = [];
-        const tmpCourse = searchCourse(id);
+        const tmpCourse = searchCourse(id,coursePool);
         tmpCourse.prerequisite.forEach(pre=>{
             if(checkPrerequisite(pre,semesterIndex)===false) tmpNotSatisfiedCourses.push(pre);
         });
         if(tmpNotSatisfiedCourses.length===0){
         //    if(checkDuplicate(id,semesterIndex)){
-            const tmpNewCourse = searchCourse(id);
+            const tmpNewCourse = searchCourse(id,coursePool);
             const tmpAllUserCourses = AllUserCourses;
             tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,tmpNewCourse];
             setAllUserCourses(tmpAllUserCourses);
@@ -141,8 +142,8 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
                                 {/* <td>{course.description}</td> */}
                                 <td>{course.credit}</td>
                                 <td>
-                                    <FaEdit className='semester-icon' fontSize="30px" onClick={()=>showEditForm(course.id)}>Edit</FaEdit>
-                                    <FaTrash className='semester-icon' fontSize="25px" onClick={()=>deleteCourse(course.id)}>Delete</FaTrash>
+                                    <FaEdit data-testid="FaEdit"className='semester-icon' fontSize="30px" onClick={()=>showEditForm(course.id)}>Edit</FaEdit>
+                                    <FaTrash data-testid="FaTrash"className='semester-icon' fontSize="25px" onClick={()=>deleteCourse(course.id)}>Delete</FaTrash>
                                 </td>
                                 {isOver}
                             </tr> );
@@ -156,7 +157,8 @@ const SemesterBoard = ({semester,AllUserCourses,setAllUserCourses,semesterIndex,
             {showEditDiagram?
                 <div className='outer-diagram'>
                     <div className='diagram'>
-                        <EditCourseForm  editTmpId={editTmpId}  editCourseForm={editCourseForm} setShowEditDiagram={setShowEditDiagram} searchCourse={searchCourse}/>
+                        <EditCourseForm  editTmpId={editTmpId}  editCourseForm={editCourseForm} setShowEditDiagram={setShowEditDiagram}
+                            searchCourse={searchCourse} coursePool={coursePool}/>
                     </div>
                 </div> :
                 <div></div>

@@ -3,6 +3,7 @@ import React from "react";
 import Tutorials from "./components/Tutorials";
 import AddCourseForm from "./components/AddCourseForm";
 import {defaultOb} from "./interfaces/coursePool";
+import App from "./App";
 
 describe("Tutorials",()=>{
     test("renders Tutorials text", () => {
@@ -21,14 +22,16 @@ describe("AddCourseForm",  ()=>{
     test("input element placeholder",()=>{
         render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]}
             searchCourse={jest.fn()} checkPrerequisite={jest.fn()} defaultOb={defaultOb}
-            editDbCourse={jest.fn()} checkDuplicate={jest.fn()}/>);
+            editDbCourse={jest.fn()} checkDuplicate={jest.fn()}
+            AllUserCourses={[]} setAllUserCourses={jest.fn()} coursePool={[]}/>);
         const InputBoxElement = screen.getByPlaceholderText(/Ex. CISC106/i);
         expect(InputBoxElement).toBeInTheDocument();
     });
     test("input element value change",()=>{
         render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]}
             searchCourse={jest.fn()} checkPrerequisite={jest.fn()} defaultOb={defaultOb}
-            editDbCourse={jest.fn()} checkDuplicate={jest.fn()}/>);
+            editDbCourse={jest.fn()} checkDuplicate={jest.fn()}
+            AllUserCourses={[]} setAllUserCourses={jest.fn()} coursePool={[]}/>);
         const InputElement = screen.getByPlaceholderText(/Ex. CISC106/i) as  HTMLInputElement;
         fireEvent.change(InputElement, {target:{value:"cisc106"}}); //after a event happen
         expect(InputElement.value).toBe("cisc106");
@@ -36,7 +39,8 @@ describe("AddCourseForm",  ()=>{
     test("input element not empty after search button is clicked",()=>{
         render(<AddCourseForm onAdd={mockedOnAdd} semesterPool = {[]}
             searchCourse={jest.fn()} checkPrerequisite={jest.fn()} defaultOb={defaultOb}
-            editDbCourse={jest.fn()} checkDuplicate={jest.fn()}/>);
+            editDbCourse={jest.fn()} checkDuplicate={jest.fn()}
+            AllUserCourses={[]} setAllUserCourses={jest.fn()} coursePool={[]}/>);
         const buttonElement = screen.getByRole("button", {name:/Search Course/i});
         const InputElement = screen.getByPlaceholderText(/Ex. CISC106/i) as  HTMLInputElement;
         fireEvent.change(InputElement, {target:{value:"cisc106"}});

@@ -6,10 +6,11 @@ interface editCourseForm{
     editTmpId:string;
     editCourseForm: (tmpCourse: courseType) => void
     setShowEditDiagram: React.Dispatch<React.SetStateAction<boolean>>
-    searchCourse: (id: string) => courseType
+    searchCourse: (id: string,coursePool: courseType[]) => courseType
+    coursePool:courseType[]
 }
 
-const EditCourseForm = ({editTmpId,editCourseForm,setShowEditDiagram, searchCourse}:editCourseForm):JSX.Element => {
+const EditCourseForm = ({editTmpId,editCourseForm,setShowEditDiagram, searchCourse,coursePool}:editCourseForm):JSX.Element => {
     const [name,setName] = useState("");
     const [description, setDescription] = useState("");
     const [credit, setCredit] = useState<number>(0);
@@ -17,7 +18,7 @@ const EditCourseForm = ({editTmpId,editCourseForm,setShowEditDiagram, searchCour
     const onSubmitPlan = (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         const id = editTmpId;
-        const tmpCourse = searchCourse(id);
+        const tmpCourse = searchCourse(id,coursePool);
         const prerequisite  = tmpCourse.prerequisite;
         const required = tmpCourse.required;
         const elective = tmpCourse.elective;

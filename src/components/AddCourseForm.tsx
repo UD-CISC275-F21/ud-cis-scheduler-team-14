@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { courseType } from "../interfaces/coursePool";
+import { AllUserCoursesType, courseType } from "../interfaces/coursePool";
 import CourseInfoForm from "./CourseInfoForm";
 
 interface addCourseForm{
-    onAdd: (course: courseType, semester: number) => void
+    onAdd:  (course: courseType, semesterIndex: number, AllUserCourses: AllUserCoursesType, setAllUserCourses: (value: React.SetStateAction<AllUserCoursesType>) => void) => void
     semesterPool:string[]
-    searchCourse: (id: string) => courseType
+    searchCourse: (id: string, coursePool: courseType[]) => courseType
     checkPrerequisite: (requiredCourseId: string, semesterIndex: number) => boolean
     defaultOb:  courseType
     editDbCourse: (tmpCourse: courseType, editId:string) => void
     checkDuplicate: (courseId: string, semesterIndex: number) => boolean
+    AllUserCourses: AllUserCoursesType
+    setAllUserCourses: (value: React.SetStateAction<AllUserCoursesType>) => void
+    coursePool: courseType[]
 }
 
-const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, defaultOb, editDbCourse,checkDuplicate}:addCourseForm):JSX.Element => {
+const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, defaultOb, editDbCourse,checkDuplicate,AllUserCourses,setAllUserCourses,coursePool}:addCourseForm):JSX.Element => {
     const [showAdd, setShowAdd] = useState(false);
     const [id,setId] = useState("");
     const [semester,setSemester] = useState("");
@@ -26,7 +29,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
         e.preventDefault();
 
         //find course info
-        const tmpCourse =searchCourse(id);
+        const tmpCourse =searchCourse(id,coursePool);
         if(tmpCourse===undefined){ //does this line works?
             return false;
         }
@@ -68,7 +71,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
         //do the add
         if(!notSatisfiedCourses.length){
             if(!checkDuplicate(course.id,semesterIndex)){
-                onAdd(course,semesterIndex);
+                onAdd(course,semesterIndex,AllUserCourses,setAllUserCourses);
                 // alert("add failed. "+course.id+" is already in the semester")
 
             }else{
@@ -113,7 +116,7 @@ const AddCourseForm = ({onAdd, semesterPool, searchCourse, checkPrerequisite, de
             </Form>
             {showAdd &&
             <CourseInfoForm tmpCourse={tmpCourse} showAddFail={showAddFail} notSatisfiedCourses={notSatisfiedCourses} addCourse={addCourse}
-                editDbCourse= {editDbCourse} searchCourse = {searchCourse} setShowAdd={setShowAdd}/>
+                editDbCourse= {editDbCourse} searchCourse = {searchCourse} setShowAdd={setShowAdd} coursePool={coursePool}/>
             }
 
         </div>
