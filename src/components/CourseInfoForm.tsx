@@ -23,7 +23,7 @@ const CourseInfoForm = ({tmpCourse, showAddFail, notSatisfiedCourses, addCourse,
             <p>credit: {tmpCourse.credit}</p>
             {tmpCourse.required ? <p>{tmpCourse.id} is a required class</p>:<p></p>}
             {tmpCourse.elective ? <p>{tmpCourse.id} is an elective class</p>:<p></p>}
-            {showAddFail ? notSatisfiedCourses.map((course,index)=><p key={index}>notSatisiedCourses: {course} is not satisifed as prerequisite in all previous semesters</p>):<p></p>}
+            {showAddFail ? notSatisfiedCourses.map((course,index)=><p key={index} style={{color:"red"}}>notSatisiedCourses: {course} is not satisifed as prerequisite in all previous semesters</p>):<p></p>}
             <button className="btn btn-success m-3" onClick={()=>addCourse(tmpCourse)}>Save Course</button>
 
             <button className="btn btn-primary m-3" onClick={()=>setShowEdit(true)}>Edit Course Info</button>
