@@ -1,6 +1,6 @@
 [
     {
-        
+
         "id":"CISC106",
         "name":"General Computer Science for Engineers",
         "description":"Principles of computer science illustrated and applied through programming in a general-purpose language. Programming projects illustrate computational problems, styles, and issues that arise in engineering.",
@@ -10,7 +10,7 @@
         "elective":false
     },
     {
-        
+
         "id":"CISC108",
         "name":"Introduction to Computer Science I",
         "description":"Computing and principles of programming with an emphasis on systematic program design. Topics include functional programming, data abstraction, procedural abstraction, use of control and state, recursion, testing, and object-oriented programming concepts. Requires no prior programming experience, open to any major, but intended primarily for majors and minors in computer science or mathematics.",
@@ -21,7 +21,7 @@
     },
 
     {
-        
+
         "id":"CISC181",
         "name":"Introduction to Computer Science II",
         "description":"Principles of computer science illustrated and applied through programming in an object oriented language. Programming projects illustrate computational problems, styles and issues that arise in computer systems development and in all application areas of computation.",
@@ -31,7 +31,7 @@
         "elective":false
     },
     {
-        
+
         "id":"CISC210",
         "name":"Introduction to Systems Programming",
         "description":"Principles of computer systems programming for software and hardware platforms to achieve efficient resource usage. Topics include the C programming language, memory management, and awareness of system constraints and interfacing. Projects include programming embedded systems and interactive objects.",
@@ -41,17 +41,17 @@
         "elective":false
     },
     {
-        
+
         "id":"CISC220",
         "name":"Data Structures",
         "description":"Review of data type abstraction, recursion, arrays, stacks, queues, multiple stacks and linked lists. Emphasis on dynamic storage management, garbage collection, trees, graphs, tables, sorting and searching.",
         "credit":3,
-        "prerequisite":["CISC108, CISC210"],
+        "prerequisite":["CISC108", "CISC210"],
         "required":true,
         "elective":false
     },
     {
-        
+
         "id":"CISC260",
         "name":"Machine Organization and Assembly Language",
         "description":"Introduction to the basics of machine organization. Programming tools and techniques at the machine and assembly levels. Assembly language programming and computer arithmetic techniques.",
@@ -61,7 +61,7 @@
         "elective":false
     },
     {
-        
+
         "id":"CISC275",
         "name":"Introduction to Software Engineering",
         "description":"Object oriented software design and development through use of an object oriented programming language. Topics include team programming, design patterns, graphical user interfaces, software engineering tools (e.g., integrated development environments, version control, build management, bug tracking, automated testing).",
@@ -179,7 +179,7 @@
         "required":true,
         "elective":false
     },
-  
+
     {
         "id":"CISC450",
         "name":"CISC 450 - Computer Networks I",
@@ -1012,5 +1012,5 @@
         "elective":false
     }
 
-    
+
 ]

@@ -12,13 +12,13 @@ export type courseType = {
     name:string
     description:string
     credit:number
-    prerequisite:Array<string> 
+    prerequisite:Array<string>
     required:boolean
     elective:boolean
   }
 export type semesterName = string
 export type semesterCoursesType = courseType[]
-export type semesterType = [semesterName,semesterCoursesType]
+export type semesterType = {semesterName:string,semesterCourses:courseType[]}
 export type AllUserCoursesType = {
     semesterName: string;
     semesterCourses: courseType[];

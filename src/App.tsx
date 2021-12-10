@@ -4,7 +4,7 @@ import {Col, Row } from "react-bootstrap"; //Row
 import SemesterBoard from "./components/SemesterBoard";
 import COURSEPOOLJSON from "./assets/coursePool.json";
 import AddCourseForm from "./components/AddCourseForm";
-import { tsXLXS } from "ts-xlsx-export";
+// import { tsXLXS } from "ts-xlsx-export";
 import Header from "./components/Header";
 import PoolOfCourse from "./components/PoolOfCourse";
 import DegreeRequirementForm from "./components/DegreeRequirementForm";
@@ -14,25 +14,22 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { addCourse, addSemester, getLocalStorageCourses, getLocalStorageSemester } from "./utilities/data";
 
-
 function App():JSX.Element {
     const [coursePool, setCoursePool] = useState<courseType[]>(COURSEPOOLJSON);
     const [AllUserCourses, setAllUserCourses] = useState<AllUserCoursesType>(getLocalStorageCourses());
     const [semesterPool, setSemesterPool] = useState<string[]>(getLocalStorageSemester());
     const [showTutorial, setShowTutorial] = useState<boolean>(true);
 
-    const exportAsExcelFile =()=>{
-        tsXLXS().exportAsExcelFile(AllUserCourses).saveAsExcelFile("FourYearPlan");
-    }; //extension auto applie , not working
-
-
+    // const exportAsExcelFile =()=>{
+    //     tsXLXS().exportAsExcelFile(AllUserCourses).saveAsExcelFile("FourYearPlan");
+    // }; //extension auto applie , not working
 
     return (
         <div className="App">
             <Tutorials showTutorial = {showTutorial}setShowTutorial={setShowTutorial} />
             <DndProvider backend={HTML5Backend}>
                 <Row>
-                    <Header exportAsExcelFile={exportAsExcelFile} setShowTutorial={setShowTutorial} AllUserCourses={AllUserCourses}/>
+                    <Header  setShowTutorial={setShowTutorial} AllUserCourses={AllUserCourses}/>
                     <Col>
                         <DegreeRequirementForm AllUserCourses = {AllUserCourses}/>
                         <h1>Pool of Course</h1>
