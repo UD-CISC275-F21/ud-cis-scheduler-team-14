@@ -3,7 +3,6 @@ import React from "react";
 import Tutorials from "./components/Tutorials";
 import AddCourseForm from "./components/AddCourseForm";
 import {defaultOb} from "./interfaces/coursePool";
-import App from "./App";
 
 describe("Tutorials",()=>{
     test("renders Tutorials text", () => {
