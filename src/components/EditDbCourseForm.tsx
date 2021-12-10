@@ -4,13 +4,14 @@ import { Form, Modal } from "react-bootstrap";
 import { courseType } from "../interfaces/coursePool";
 interface editDbCourseForm{
     editDbCourse: (tmpCourse: courseType, editId:string) => void
-    searchCourse: (id: string) => courseType
+    searchCourse: (id: string,coursePool: courseType[]) => courseType
     setShowEdit: React.Dispatch<React.SetStateAction<boolean>>
     editId:string
     setShowAdd: React.Dispatch<React.SetStateAction<boolean>>
+    coursePool: courseType[]
 }
 
-const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShowAdd}:editDbCourseForm):JSX.Element => {
+const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShowAdd,coursePool}:editDbCourseForm):JSX.Element => {
     const [name,setName] = useState("");
     const [description, setDescription] = useState("");
     const [credit, setCredit] = useState<number>(0);
@@ -21,7 +22,7 @@ const EditDbCourseForm = ({editDbCourse,searchCourse,setShowEdit,editId, setShow
 
     const onSubmitDb = (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        const tmpCourse = searchCourse(id);
+        const tmpCourse = searchCourse(id,coursePool);
         setPrerequisite(tmpCourse.prerequisite);
         editDbCourse({name, description, credit, id, required, elective, prerequisite}, editId);
         setPrerequisite([]);

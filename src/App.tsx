@@ -12,35 +12,7 @@ import Tutorials from "./components/Tutorials";
 import { AllUserCoursesType, courseType, defaultOb} from "./interfaces/coursePool";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-
-
-const coursePool = COURSEPOOLJSON;
-export const LOCAL_STRORAGE_COURSES = "current-courses";
-export const defaultSemester = [
-    {semesterName: "First Fall", semesterCourses:[coursePool[0]]},
-    {semesterName:"First Spring", semesterCourses:[coursePool[2],coursePool[3]]}
-];
-export const defaultSemesterPool = [defaultSemester[0].semesterName,defaultSemester[1].semesterName];
-
-export const getLocalStorageCourses = ():AllUserCoursesType | (() => AllUserCoursesType)=>{
-    const defaultCourses : string| null= localStorage.getItem(LOCAL_STRORAGE_COURSES); //need if statement because "null" problem
-    if(defaultCourses===null){
-        return [...defaultSemester];
-    }else{
-        return JSON.parse(defaultCourses);
-    }
-};
-export const getLocalStorageSemester=():string[]=>{
-    const tmpSemesterPool:string[] = [];
-    const defaultCourses : string| null= localStorage.getItem(LOCAL_STRORAGE_COURSES);
-    if(defaultCourses===null){
-        return defaultSemesterPool;
-    } else{
-        const tmpDefaultCourses:AllUserCoursesType = JSON.parse(defaultCourses);
-        tmpDefaultCourses.forEach(semester=>tmpSemesterPool.push(semester.semesterName));
-        return tmpSemesterPool;
-    }
-};
+import { addCourse, addSemester, getLocalStorageCourses, getLocalStorageSemester, LOCAL_STRORAGE_COURSES, searchCourse } from "./utilities/data";
 
 
 function App():JSX.Element {
@@ -49,41 +21,8 @@ function App():JSX.Element {
     const [semesterPool, setSemesterPool] = useState<string[]>(getLocalStorageSemester());
     const [showTutorial, setShowTutorial] = useState<boolean>(true);
 
-    const addSemester=()=>{
-        const newSemesterName = semesterPool.length+1;
-        const tmpSemesterPool = semesterPool;
-        tmpSemesterPool.push("new semester "+newSemesterName);
-        setAllUserCourses([ ...AllUserCourses,{semesterName: "new semester "+newSemesterName, semesterCourses:[]} ]);
-        setSemesterPool(tmpSemesterPool);
 
-    };
-    const addCourse = (course:courseType,semesterIndex:number) => {
-
-        const tmpAllUserCourses = JSON.parse(JSON.stringify(AllUserCourses));
-        tmpAllUserCourses[semesterIndex].semesterCourses = [...tmpAllUserCourses[semesterIndex].semesterCourses,course];
-        setAllUserCourses(tmpAllUserCourses);
-        alert("add success");
-
-    };
-
-    const searchCourse=(id:string)=>{
-        const TmpCoursePool:courseType[] = JSON.parse(JSON.stringify(coursePool));
-        const uppercase = id.toUpperCase();
-        let curIndex = 0;
-        let exist = false;
-        TmpCoursePool.forEach((value,index) => {
-            if (value.id===uppercase) {
-                curIndex = index;
-                exist = true;
-            }
-        });
-        if (exist){
-            return TmpCoursePool[curIndex];
-        }
-        return defaultOb;
-    };
     const save=()=>{
-        console.log("save");
         localStorage.setItem(LOCAL_STRORAGE_COURSES,JSON.stringify(AllUserCourses));
     };
 
@@ -92,7 +31,7 @@ function App():JSX.Element {
     }; //extension auto applie , not working
 
     const checkPrerequisite=(requiredCourseId:string, semesterIndex:number)=>{
-        let tmpPreviousCourses= AllUserCourses;
+        let tmpPreviousCourses:AllUserCoursesType= JSON.parse(JSON.stringify(AllUserCourses));
         let isSatisfy = false;
         tmpPreviousCourses=AllUserCourses.filter((item, index)=> index<semesterIndex);
         tmpPreviousCourses.map(course=>course.semesterCourses.map((item)=>{
@@ -103,7 +42,7 @@ function App():JSX.Element {
         return isSatisfy;
     };
 
-    const checkDuplicate=(courseId:string, semesterIndex:number)=>{
+    const checkDuplicate=(courseId:string, semesterIndex:number)=>{ //not working
         let tmpCurrentSemesterCourses:courseType[] = [];
         AllUserCourses.forEach((semester, index)=>{
             if(index === semesterIndex){
@@ -113,7 +52,7 @@ function App():JSX.Element {
         });
         tmpCurrentSemesterCourses.forEach(course=>{
             console.log("course id " +course.id);
-            if(course.id === courseId){ //this line has issue
+            if(course.id === courseId){
                 console.log("return true here");
                 return true;
             }
@@ -128,8 +67,6 @@ function App():JSX.Element {
         tmpCoursePool.forEach((course,index)=>{
             if (course.id == editId) curIndex = index;
         });
-
-        console.log("curIndex "+ curIndex);
         tmpCoursePool[curIndex] = tmpCourse;
         setCoursePool(tmpCoursePool);
 
@@ -149,14 +86,15 @@ function App():JSX.Element {
                     </Col>
                     <Col xs={8}>
                         <AddCourseForm onAdd={addCourse} semesterPool={semesterPool} searchCourse={searchCourse} checkPrerequisite={checkPrerequisite}
-                            defaultOb={defaultOb} editDbCourse= {editDbCourse} checkDuplicate={checkDuplicate}/>
-                        <button className="btn btn-success m-2" onClick={()=>addSemester() }>Add Semester</button>
+                            defaultOb={defaultOb} editDbCourse= {editDbCourse} checkDuplicate={checkDuplicate}
+                            AllUserCourses={AllUserCourses} setAllUserCourses={setAllUserCourses} coursePool={coursePool}/>
+                        <button className="btn btn-success m-2" onClick={()=>addSemester(semesterPool,setAllUserCourses,AllUserCourses,setSemesterPool) }>Add Semester</button>
                         <div style={{display:"grid", gridTemplateColumns:"50% 50%"}}>
                             {AllUserCourses.map((semester, index)=>
                                 <SemesterBoard semester = {semester} semesterIndex = {index} key={index}
                                     semesterPool = {semesterPool} setSemesterPool = {setSemesterPool} checkPrerequisite={checkPrerequisite}
                                     AllUserCourses = {AllUserCourses} setAllUserCourses={setAllUserCourses} searchCourse = {searchCourse}
-                                    checkDuplicate = {checkDuplicate} />)
+                                    checkDuplicate = {checkDuplicate} coursePool={coursePool}/>)
                             }
                         </div>
                     </Col>

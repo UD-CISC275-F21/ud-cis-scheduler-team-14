@@ -32,7 +32,7 @@ const Tutorials = ({showTutorial,setShowTutorial}:tutorials):JSX.Element => {
                     </p>
                     <p><strong>Semester Board</strong> <br></br>
                         <strong>X</strong> delete current semester <br></br>
-                        <strong>Clear Courses</strong>: delete all courses in current semester <br></br>
+                        <strong>Clear Course</strong>: delete all courses in current semester <br></br>
                         <strong>Edit Icon</strong>: edit information only displayed in this semester table<br></br>
                         <strong>Delete Icon</strong>: remove current course
                     </p>
